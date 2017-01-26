@@ -4904,6 +4904,22 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 <td>Data de entrega</td>
 </tr>
 <tr>
+<td>shipping_type</td>
+<td>*</td>
+<td></td>
+<td>Varchar</td>
+<td>50</td>
+<td>Tipo de entrega</td>
+</tr>
+<tr>
+<td>shipping_delivery_date</td>
+<td>*</td>
+<td></td>
+<td>Date</td>
+<td>-</td>
+<td>Data de entrega</td>
+</tr>
+<tr>
 <td>item_total</td>
 <td>*</td>
 <td></td>
@@ -5831,6 +5847,68 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 
 <h2 id="nota-fiscal">Nota Fiscal</h2>
 
+<h3 id="descri-o-dos-campos">Descrição dos campos</h3>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Requerido</th>
+<th>Unico</th>
+<th>Tipo do Campo</th>
+<th>Max Caracteres</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td></td>
+<td>*</td>
+<td>Int4</td>
+<td>-</td>
+<td>ID do pedido</td>
+</tr>
+<tr>
+<td>order</td>
+<td>*</td>
+<td></td>
+<td>Int4</td>
+<td>-</td>
+<td>ID do pedido</td>
+</tr>
+<tr>
+<td>reference_code</td>
+<td>*</td>
+<td></td>
+<td>Varchar</td>
+<td>64</td>
+<td>Número da nota fiscal</td>
+</tr>
+<tr>
+<td>key</td>
+<td>*</td>
+<td></td>
+<td>Int4</td>
+<td>-</td>
+<td>ID do cliente</td>
+</tr>
+<tr>
+<td>date_issue</td>
+<td>*</td>
+<td></td>
+<td>Datetime</td>
+<td>-</td>
+<td>Data de emissão (yyyy-mm-ddTHH:ii:ss)</td>
+</tr>
+<tr>
+<td>total</td>
+<td>*</td>
+<td></td>
+<td>Numeric</td>
+<td>10,2</td>
+<td>Total da nota</td>
+</tr>
+</tbody></table>
+
 <h3 id="http-request-create">HTTP Request Create</h3>
 
 <aside class="request">
@@ -5838,7 +5916,7 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 </aside>
 <pre class="highlight python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s">'https://DOMINIO_DO_CLIENTE/api/1.0/orders/&lt;ID&gt;/invoices/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://DOMINIO_DO_CLIENTE/api/1.0/orders/&lt;ID&gt;/invoices/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
   <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Token </span><span class="si">%</span><span class="s">s'</span> <span class="o">%</span> <span class="n">API_KEY</span><span class="p">,</span>
   <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/json'</span>
 <span class="p">},</span> <span class="n">data</span><span class="o">=&lt;</span><span class="n">JSON</span><span class="o">&gt;</span><span class="p">)</span>
@@ -5849,14 +5927,16 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 <pre class="highlight shell"><code>curl <span class="s2">"https://DOMINIO_DO_CLIENTE/api/1.0/orders/&lt;ID&gt;/invoices/"</span>
   -H <span class="s2">"Authorization: Token API_KEY"</span>
   -H <span class="s2">"Content-Type: application/json"</span>
-  -X PUT -d <span class="s1">'&lt;JSON&gt;'</span>
+  -X POST -d <span class="s1">'&lt;JSON&gt;'</span>
 </code></pre>
 
 <blockquote>
 <p>Exemplo &lt; JSON &gt; a ser enviado:</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"order"</span><span class="p">:</span><span class="w"> </span><span class="mi">172</span><span class="p">,</span><span class="w">
     </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12312312313212"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"reference_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"01"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"date_issue"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1989-10-01T10:59:59"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="s2">"150.50"</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -5868,7 +5948,7 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w">
     </span><span class="nt">"order"</span><span class="p">:</span><span class="w"> </span><span class="mi">172</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"reference_code"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"reference_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"01"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12312312313212"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"date_issue"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1989-10-01T10:59:59"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="s2">"150.50"</span><span class="p">,</span><span class="w">
