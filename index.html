@@ -92,7 +92,7 @@
       <script src="javascripts/all.js"></script>
   </head>
 
-  <body class="index" data-languages="[&quot;python&quot;,&quot;shell&quot;]">
+  <body class="index" data-languages="[&quot;csharp&quot;,&quot;shell&quot;,&quot;python&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -102,8 +102,9 @@
     <div class="tocify-wrapper">
       <img src="images/logo.png" />
         <div class="lang-selector">
-              <a href="#" data-language-name="python">python</a>
-              <a href="#" data-language-name="shell">shell</a>
+              <a href="#" data-language-name="csharp">C#</a>
+              <a href="#" data-language-name="shell">cURL</a>
+              <a href="#" data-language-name="python">Python</a>
         </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
@@ -126,6 +127,16 @@
 
 <p>Nossa API possui um conjunto de documentos que podem ser ultilizados como base, oferecendo recursos para controlar, integrar seu e-commerce com qualquer sistema, de forma rapida e fácil.</p>
 
+<p><strong>Ambiente Produção:</strong>
+https://api.convertize.com.br/</p>
+
+<p><strong>{ENVIRONMENT}:</strong>
+Nome dado para o ambiente do cliente junto a Convertize últlizado em todas as requisições da API</p>
+
+<p>Para executar uma operação, combine a URL base do ambiente com a URL do {ENVIRONMENT} com a URL da operação desejada e envie utilizando o verbo HTTP conforme descrito na operação.</p>
+
+<p><strong>Exemplo:</strong> {URL_BASE}/{ENVIRONMENT}/{URL_OPERACAO}</p>
+
           <h1 id="autentica-o">Autenticação</h1>
 
 <blockquote>
@@ -139,6 +150,15 @@
 </code></pre>
 <pre class="highlight shell"><code>curl <span class="s2">"api_endpoint_here"</span>
   -H <span class="s2">"Authorization: Token API_KEY"</span>
+</code></pre>
+<pre class="highlight csharp"><code><span class="k">using</span> <span class="nn">RestSharp</span><span class="p">;</span>
+<span class="n">var</span> <span class="n">client</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">RestClient</span><span class="p">(</span><span class="s">"api_endpoint_here"</span><span class="p">);</span>
+
+<span class="n">var</span> <span class="n">request</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">RestRequest</span><span class="p">(</span><span class="s">"request_path"</span><span class="p">);</span>
+<span class="n">request</span><span class="p">.</span><span class="n">Method</span> <span class="p">=</span> <span class="n">Method</span><span class="p">.</span><span class="n">GET</span><span class="p">;</span>
+<span class="n">request</span><span class="p">.</span><span class="nf">AddHeader</span><span class="p">(</span><span class="s">"Authorization"</span><span class="p">,</span> <span class="s">"Token "</span> <span class="p">+</span> <span class="n">API_KEY</span><span class="p">);</span>
+
+<span class="n">var</span> <span class="n">response</span> <span class="p">=</span> <span class="n">client</span><span class="p">.</span><span class="nf">Execute</span><span class="p">(</span><span class="n">request</span><span class="p">);</span>
 </code></pre>
 
 <blockquote>
@@ -291,6 +311,549 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 </tr>
 </tbody></table>
 
+          <h1 id="clientes">Clientes</h1>
+
+<h2 id="lista">Lista</h2>
+
+<h3 id="lista-de-clientes">Lista de Clientes</h3>
+<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/customers/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+  <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Token </span><span class="si">%</span><span class="s">s'</span> <span class="o">%</span> <span class="n">API_KEY</span>
+<span class="p">})</span>
+
+<span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span>
+<span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</code></pre>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/customers/"</span>
+  -H <span class="s2">"Authorization: Token API_KEY"</span>
+</code></pre>
+<pre class="highlight csharp"><code><span class="k">using</span> <span class="nn">RestSharp</span><span class="p">;</span>
+<span class="n">var</span> <span class="n">client</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">RestClient</span><span class="p">(</span><span class="s">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/"</span><span class="p">);</span>
+
+<span class="n">var</span> <span class="n">request</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">RestRequest</span><span class="p">(</span><span class="s">"/customers/"</span><span class="p">);</span>
+<span class="n">request</span><span class="p">.</span><span class="n">Method</span> <span class="p">=</span> <span class="n">Method</span><span class="p">.</span><span class="n">GET</span><span class="p">;</span>
+<span class="n">request</span><span class="p">.</span><span class="nf">AddHeader</span><span class="p">(</span><span class="s">"Authorization"</span><span class="p">,</span> <span class="s">"Token "</span> <span class="p">+</span> <span class="n">API_KEY</span><span class="p">);</span>
+
+<span class="n">var</span> <span class="n">response</span> <span class="p">=</span> <span class="n">client</span><span class="p">.</span><span class="nf">Execute</span><span class="p">(</span><span class="n">request</span><span class="p">);</span>
+</code></pre>
+
+<blockquote>
+<p>O comando acima retonar um JSON conforme estrutura abaixo:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">40607</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"next"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/customers/?page=2"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"previous"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"results"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">138468</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"reference_code"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"contato@convertize.com.br"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Convertize E-Commerce"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"blocked"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"newsletter"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"zipcode"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"address"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"neighborhood"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"complement"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"phone1"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"phone2"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"reference"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"city_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"code_ibge"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"add_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-08-18T14:04:04.826000"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"change_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-08-18T14:04:04.826020"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"limit_credit"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"balance_of_credit"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<aside class="request">
+    <span class="method get">GET</span><span class="endpoint">/{ENVIRONMENT}/api/1.0/customers/</span>
+</aside>
+
+<h3 id="filtros-via-query-parameters">Filtros via Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>ID do cliente</td>
+</tr>
+<tr>
+<td>reference_code</td>
+<td>Código de referência no ERP</td>
+</tr>
+<tr>
+<td>newsletter</td>
+<td>Filtro pelo campo newsletter</td>
+</tr>
+<tr>
+<td>add_date__lte</td>
+<td>Filtro por data de criação menor ou igual</td>
+</tr>
+<tr>
+<td>add_date__gte</td>
+<td>Filtro por data de criação maior ou igual</td>
+</tr>
+<tr>
+<td>change_date__lte</td>
+<td>Filtro por data de alteração menor ou igual</td>
+</tr>
+<tr>
+<td>change_date__gte</td>
+<td>Filtro por data de alteração maior ou igual</td>
+</tr>
+</tbody></table>
+
+<h3 id="descri-o-dos-campos">Descrição dos campos</h3>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Requerido</th>
+<th>Unico</th>
+<th>Tipo do Campo</th>
+<th>Max Caracteres</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>*</td>
+<td>*</td>
+<td>Int4</td>
+<td>-</td>
+<td>ID do cliente</td>
+</tr>
+<tr>
+<td>reference_code</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>64</td>
+<td>Código de referência do cliente no ERP</td>
+</tr>
+<tr>
+<td>email</td>
+<td>*</td>
+<td>*</td>
+<td>Varchar</td>
+<td>255</td>
+<td>E-mail do cliente</td>
+</tr>
+<tr>
+<td>name</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>255</td>
+<td>Nome do cliente</td>
+</tr>
+<tr>
+<td>blocked</td>
+<td></td>
+<td></td>
+<td>Boolean</td>
+<td>1</td>
+<td>Indica se esta bloqueado default = false</td>
+</tr>
+<tr>
+<td>newsletter</td>
+<td></td>
+<td></td>
+<td>Int4</td>
+<td>-</td>
+<td>Indica se o cliente quer receber newsletter (1 = SIM, 2 = NÃO, 0 = NÃO)</td>
+</tr>
+<tr>
+<td>zipcode</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>9</td>
+<td>CEP</td>
+</tr>
+<tr>
+<td>address</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>100</td>
+<td>Endereço</td>
+</tr>
+<tr>
+<td>number</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>100</td>
+<td>Número</td>
+</tr>
+<tr>
+<td>neighborhood</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>100</td>
+<td>Bairro</td>
+</tr>
+<tr>
+<td>complement</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>100</td>
+<td>Complemento</td>
+</tr>
+<tr>
+<td>city</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>100</td>
+<td>Cidade</td>
+</tr>
+<tr>
+<td>state</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>2</td>
+<td>Estado</td>
+</tr>
+<tr>
+<td>phone1</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>20</td>
+<td>Telefone residencial</td>
+</tr>
+<tr>
+<td>phone2</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>20</td>
+<td>Telefone celular</td>
+</tr>
+<tr>
+<td>reference</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>255</td>
+<td>Ponto de Referencia</td>
+</tr>
+<tr>
+<td>city_id</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>50</td>
+<td>ID da cidade</td>
+</tr>
+<tr>
+<td>code_ibge</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>50</td>
+<td>Código do IBGE da cidade</td>
+</tr>
+<tr>
+<td>limit_credit</td>
+<td></td>
+<td></td>
+<td>Numeric</td>
+<td>10,2</td>
+<td>Limite de Crédito</td>
+</tr>
+<tr>
+<td>balance_of_credit</td>
+<td></td>
+<td></td>
+<td>Numeric</td>
+<td>10,2</td>
+<td>Saldo de Crédito</td>
+</tr>
+</tbody></table>
+
+<h2 id="detalhes">Detalhes</h2>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<aside class="request">
+    <span class="method get">GET</span><span class="endpoint">/{ENVIRONMENT}/api/1.0/customers/{ID}/</span>
+</aside>
+<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/customers/{ID}/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+  <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Token </span><span class="si">%</span><span class="s">s'</span> <span class="o">%</span> <span class="n">API_KEY</span>
+<span class="p">})</span>
+
+<span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span>
+<span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</code></pre>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/customers/{ID}/"</span>
+  -H <span class="s2">"Authorization: Token API_KEY"</span>
+</code></pre>
+<pre class="highlight csharp"><code><span class="k">using</span> <span class="nn">RestSharp</span><span class="p">;</span>
+<span class="n">var</span> <span class="n">client</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">RestClient</span><span class="p">(</span><span class="s">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/"</span><span class="p">);</span>
+
+<span class="n">var</span> <span class="n">request</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">RestRequest</span><span class="p">(</span><span class="s">"/customers/{ID}/"</span><span class="p">);</span>
+<span class="n">request</span><span class="p">.</span><span class="n">Method</span> <span class="p">=</span> <span class="n">Method</span><span class="p">.</span><span class="n">GET</span><span class="p">;</span>
+<span class="n">request</span><span class="p">.</span><span class="nf">AddHeader</span><span class="p">(</span><span class="s">"Authorization"</span><span class="p">,</span> <span class="s">"Token "</span> <span class="p">+</span> <span class="n">API_KEY</span><span class="p">);</span>
+
+<span class="n">var</span> <span class="n">response</span> <span class="p">=</span> <span class="n">client</span><span class="p">.</span><span class="nf">Execute</span><span class="p">(</span><span class="n">request</span><span class="p">);</span>
+</code></pre>
+
+<blockquote>
+<p>O comando acima retonar um JSON conforme estrutura abaixo:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">138468</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"reference_code"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"contato@convertize.com.br"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Convertize E-Commerce"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"blocked"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"newsletter"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"zipcode"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"address"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"neighborhood"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"complement"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"phone1"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"phone2"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"reference"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"city_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"code_ibge"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"add_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-08-18T14:04:04.826000"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"change_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-08-18T14:04:04.826020"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"limit_credit"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"balance_of_credit"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h3 id="url-parameters">URL Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ID</td>
+<td>ID relativo ao Cliente</td>
+</tr>
+</tbody></table>
+
+<h3 id="descri-o-dos-campos">Descrição dos campos</h3>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Requerido</th>
+<th>Unico</th>
+<th>Tipo do Campo</th>
+<th>Max Caracteres</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>*</td>
+<td>*</td>
+<td>Int4</td>
+<td>-</td>
+<td>ID do cliente</td>
+</tr>
+<tr>
+<td>reference_code</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>64</td>
+<td>Código de referência do cliente no ERP</td>
+</tr>
+<tr>
+<td>email</td>
+<td>*</td>
+<td>*</td>
+<td>Varchar</td>
+<td>255</td>
+<td>E-mail do cliente</td>
+</tr>
+<tr>
+<td>name</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>255</td>
+<td>Nome do cliente</td>
+</tr>
+<tr>
+<td>blocked</td>
+<td></td>
+<td></td>
+<td>Boolean</td>
+<td>1</td>
+<td>Indica se esta bloqueado default = false</td>
+</tr>
+<tr>
+<td>newsletter</td>
+<td></td>
+<td></td>
+<td>Int4</td>
+<td>-</td>
+<td>Indica se o cliente quer receber newsletter (1 = SIM, 2 = NÃO, 0 = NÃO)</td>
+</tr>
+<tr>
+<td>zipcode</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>9</td>
+<td>CEP</td>
+</tr>
+<tr>
+<td>address</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>100</td>
+<td>Endereço</td>
+</tr>
+<tr>
+<td>number</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>100</td>
+<td>Número</td>
+</tr>
+<tr>
+<td>neighborhood</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>100</td>
+<td>Bairro</td>
+</tr>
+<tr>
+<td>complement</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>100</td>
+<td>Complemento</td>
+</tr>
+<tr>
+<td>city</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>100</td>
+<td>Cidade</td>
+</tr>
+<tr>
+<td>state</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>2</td>
+<td>Estado</td>
+</tr>
+<tr>
+<td>phone1</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>20</td>
+<td>Telefone residencial</td>
+</tr>
+<tr>
+<td>phone2</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>20</td>
+<td>Telefone celular</td>
+</tr>
+<tr>
+<td>reference</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>255</td>
+<td>Ponto de Referencia</td>
+</tr>
+<tr>
+<td>city_id</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>50</td>
+<td>ID da cidade</td>
+</tr>
+<tr>
+<td>code_ibge</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>50</td>
+<td>Código do IBGE da cidade</td>
+</tr>
+<tr>
+<td>limit_credit</td>
+<td></td>
+<td></td>
+<td>Numeric</td>
+<td>10,2</td>
+<td>Limite de Crédito</td>
+</tr>
+<tr>
+<td>balance_of_credit</td>
+<td></td>
+<td></td>
+<td>Numeric</td>
+<td>10,2</td>
+<td>Saldo de Crédito</td>
+</tr>
+<tr>
+<td>limit_credit</td>
+<td></td>
+<td></td>
+<td>Numeric</td>
+<td>10,2</td>
+<td>Limite de Crédito</td>
+</tr>
+<tr>
+<td>balance_of_credit</td>
+<td></td>
+<td></td>
+<td>Numeric</td>
+<td>10,2</td>
+<td>Saldo de Crédito</td>
+</tr>
+</tbody></table>
+
           <h1 id="categorias">Categorias</h1>
 
 <h2 id="lista">Lista</h2>
@@ -298,15 +861,24 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 <h3 id="lista-de-categorias">Lista de categorias</h3>
 <pre class="highlight python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://DOMINIO_DO_CLIENTE/api/1.0/categories/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/categories/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
   <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Token </span><span class="si">%</span><span class="s">s'</span> <span class="o">%</span> <span class="n">API_KEY</span>
 <span class="p">})</span>
 
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span>
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 </code></pre>
-<pre class="highlight shell"><code>curl <span class="s2">"https://DOMINIO_DO_CLIENTE/api/1.0/categories/"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/"</span>
   -H <span class="s2">"Authorization: Token API_KEY"</span>
+</code></pre>
+<pre class="highlight csharp"><code><span class="k">using</span> <span class="nn">RestSharp</span><span class="p">;</span>
+<span class="n">var</span> <span class="n">client</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">RestClient</span><span class="p">(</span><span class="s">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/"</span><span class="p">);</span>
+
+<span class="n">var</span> <span class="n">request</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">RestRequest</span><span class="p">(</span><span class="s">"/categories/"</span><span class="p">);</span>
+<span class="n">request</span><span class="p">.</span><span class="n">Method</span> <span class="p">=</span> <span class="n">Method</span><span class="p">.</span><span class="n">GET</span><span class="p">;</span>
+<span class="n">request</span><span class="p">.</span><span class="nf">AddHeader</span><span class="p">(</span><span class="s">"Authorization"</span><span class="p">,</span> <span class="s">"Token "</span> <span class="p">+</span> <span class="n">API_KEY</span><span class="p">);</span>
+
+<span class="n">var</span> <span class="n">response</span> <span class="p">=</span> <span class="n">client</span><span class="p">.</span><span class="nf">Execute</span><span class="p">(</span><span class="n">request</span><span class="p">);</span>
 </code></pre>
 
 <blockquote>
@@ -314,11 +886,11 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">188</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"next"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://DOMINIO_DO_CLIENTE/api/1.0/categories/?page=2"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"next"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/categories/?page=2"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"previous"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
     </span><span class="nt">"results"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://DOMINIO_DO_CLIENTE/api/1.0/categories/4/"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/categories/4/"</span><span class="p">,</span><span class="w">
             </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
             </span><span class="nt">"parent"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
             </span><span class="nt">"_order"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
@@ -338,7 +910,7 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
             </span><span class="nt">"level"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://DOMINIO_DO_CLIENTE/api/1.0/categories/74/"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/categories/74/"</span><span class="p">,</span><span class="w">
             </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">74</span><span class="p">,</span><span class="w">
             </span><span class="nt">"parent"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
             </span><span class="nt">"_order"</span><span class="p">:</span><span class="w"> </span><span class="mi">65</span><span class="p">,</span><span class="w">
@@ -363,7 +935,9 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET https://DOMINIO_DO_CLIENTE/api/1.0/categories/</code></p>
+<aside class="request">
+    <span class="method get">GET</span><span class="endpoint">/{ENVIRONMENT}/api/1.0/categories/</span>
+</aside>
 
 <h3 id="filtros-via-query-parameters">Filtros via Query Parameters</h3>
 
@@ -489,25 +1063,36 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET https://DOMINIO_DO_CLIENTE/api/1.0/categories/&lt;ID&gt;/</code></p>
+<aside class="request">
+    <span class="method get">GET</span><span class="endpoint">/{ENVIRONMENT}/api/1.0/categories/{ID}/</span>
+</aside>
 <pre class="highlight python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://DOMINIO_DO_CLIENTE/api/1.0/categories/&lt;ID&gt;/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/categories/{ID}/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
   <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Token </span><span class="si">%</span><span class="s">s'</span> <span class="o">%</span> <span class="n">API_KEY</span>
 <span class="p">})</span>
 
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span>
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 </code></pre>
-<pre class="highlight shell"><code>curl <span class="s2">"https://DOMINIO_DO_CLIENTE/api/1.0/categories/&lt;ID&gt;/"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/categories/{ID}/"</span>
   -H <span class="s2">"Authorization: Token API_KEY"</span>
+</code></pre>
+<pre class="highlight csharp"><code><span class="k">using</span> <span class="nn">RestSharp</span><span class="p">;</span>
+<span class="n">var</span> <span class="n">client</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">RestClient</span><span class="p">(</span><span class="s">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/"</span><span class="p">);</span>
+
+<span class="n">var</span> <span class="n">request</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">RestRequest</span><span class="p">(</span><span class="s">"/categories/{ID}/"</span><span class="p">);</span>
+<span class="n">request</span><span class="p">.</span><span class="n">Method</span> <span class="p">=</span> <span class="n">Method</span><span class="p">.</span><span class="n">GET</span><span class="p">;</span>
+<span class="n">request</span><span class="p">.</span><span class="nf">AddHeader</span><span class="p">(</span><span class="s">"Authorization"</span><span class="p">,</span> <span class="s">"Token "</span> <span class="p">+</span> <span class="n">API_KEY</span><span class="p">);</span>
+
+<span class="n">var</span> <span class="n">response</span> <span class="p">=</span> <span class="n">client</span><span class="p">.</span><span class="nf">Execute</span><span class="p">(</span><span class="n">request</span><span class="p">);</span>
 </code></pre>
 
 <blockquote>
 <p>O comando acima retonar um JSON conforme estrutura abaixo:</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://DOMINIO_DO_CLIENTE/api/1.0/categories/74/"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/categories/74/"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">74</span><span class="p">,</span><span class="w">
     </span><span class="nt">"parent"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
     </span><span class="nt">"_order"</span><span class="p">:</span><span class="w"> </span><span class="mi">65</span><span class="p">,</span><span class="w">
@@ -640,10 +1225,12 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">POST https://DOMINIO_DO_CLIENTE/api/1.0/categories/</code></p>
+<aside class="request">
+    <span class="method post">POST</span><span class="endpoint">/{ENVIRONMENT}/api/1.0/categories/</span>
+</aside>
 <pre class="highlight python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://DOMINIO_DO_CLIENTE/api/1.0/categories/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/categories/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
   <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Token </span><span class="si">%</span><span class="s">s'</span> <span class="o">%</span> <span class="n">API_KEY</span><span class="p">,</span>
   <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/json'</span>
 <span class="p">},</span> <span class="n">data</span><span class="o">=&lt;</span><span class="n">JSON</span><span class="o">&gt;</span><span class="p">)</span>
@@ -651,7 +1238,7 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span>
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 </code></pre>
-<pre class="highlight shell"><code>curl <span class="s2">"https://DOMINIO_DO_CLIENTE/api/1.0/categories/"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/categories/"</span>
   -H <span class="s2">"Authorization: Token API_KEY"</span>
   -H <span class="s2">"Content-Type: application/json"</span>
   -X POST -d <span class="s1">'&lt;JSON&gt;'</span>
@@ -674,7 +1261,7 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 <p>O comando acima retonar um JSON conforme estrutura abaixo:</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://DOMINIO_DO_CLIENTE/api/1.0/categories/74/"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/categories/74/"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">74</span><span class="p">,</span><span class="w">
     </span><span class="nt">"parent"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
     </span><span class="nt">"_order"</span><span class="p">:</span><span class="w"> </span><span class="mi">65</span><span class="p">,</span><span class="w">
@@ -793,10 +1380,12 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">PUT https://DOMINIO_DO_CLIENTE/api/1.0/categories/&lt;ID&gt;/</code></p>
+<aside class="request">
+    <span class="method put">PUT</span><span class="endpoint">/{ENVIRONMENT}/api/1.0/categories/{ID}/</span>
+</aside>
 <pre class="highlight python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s">'https://DOMINIO_DO_CLIENTE/api/1.0/categories/&lt;ID&gt;/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s">'https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/categories/{ID}/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
   <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Token </span><span class="si">%</span><span class="s">s'</span> <span class="o">%</span> <span class="n">API_KEY</span><span class="p">,</span>
   <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/json'</span>
 <span class="p">},</span> <span class="n">data</span><span class="o">=&lt;</span><span class="n">JSON</span><span class="o">&gt;</span><span class="p">)</span>
@@ -804,7 +1393,7 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span>
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 </code></pre>
-<pre class="highlight shell"><code>curl <span class="s2">"https://DOMINIO_DO_CLIENTE/api/1.0/categories/&lt;ID&gt;/"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/categories/{ID}/"</span>
   -H <span class="s2">"Authorization: Token API_KEY"</span>
   -H <span class="s2">"Content-Type: application/json"</span>
   -X PUT -d <span class="s1">'&lt;JSON&gt;'</span>
@@ -814,7 +1403,7 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 <p>Exemplo &lt; JSON &gt; a ser enviado:</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://DOMINIO_DO_CLIENTE/api/1.0/categories/74/"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/categories/74/"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">74</span><span class="p">,</span><span class="w">
     </span><span class="nt">"parent"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
     </span><span class="nt">"_order"</span><span class="p">:</span><span class="w"> </span><span class="mi">65</span><span class="p">,</span><span class="w">
@@ -839,7 +1428,7 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 <p>O comando acima retonar um JSON conforme estrutura abaixo:</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://DOMINIO_DO_CLIENTE/api/1.0/categories/74/"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/categories/74/"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">74</span><span class="p">,</span><span class="w">
     </span><span class="nt">"parent"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
     </span><span class="nt">"_order"</span><span class="p">:</span><span class="w"> </span><span class="mi">65</span><span class="p">,</span><span class="w">
@@ -973,14 +1562,14 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 <h2 id="lista">Lista</h2>
 <pre class="highlight python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://DOMINIO_DO_CLIENTE/api/1.0/brands/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/brands/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
   <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Token </span><span class="si">%</span><span class="s">s'</span> <span class="o">%</span> <span class="n">API_KEY</span>
 <span class="p">})</span>
 
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span>
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 </code></pre>
-<pre class="highlight shell"><code>curl <span class="s2">"https://DOMINIO_DO_CLIENTE/api/1.0/brands/"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/brands/"</span>
   -H <span class="s2">"Authorization: Token API_KEY"</span>
 </code></pre>
 
@@ -989,11 +1578,11 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">135</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"next"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://DOMINIO_DO_CLIENTE/api/1.0/brands/?page=2"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"next"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/brands/?page=2"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"previous"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
     </span><span class="nt">"results"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://DOMINIO_DO_CLIENTE/api/1.0/brands/735/"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/brands/735/"</span><span class="p">,</span><span class="w">
             </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">735</span><span class="p">,</span><span class="w">
             </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACR"</span><span class="p">,</span><span class="w">
             </span><span class="nt">"slug"</span><span class="p">:</span><span class="w"> </span><span class="s2">"acr"</span><span class="p">,</span><span class="w">
@@ -1005,7 +1594,7 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
             </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://DOMINIO_DO_CLIENTE/api/1.0/brands/784/"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/brands/784/"</span><span class="p">,</span><span class="w">
             </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">784</span><span class="p">,</span><span class="w">
             </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ASICS"</span><span class="p">,</span><span class="w">
             </span><span class="nt">"slug"</span><span class="p">:</span><span class="w"> </span><span class="s2">"asics"</span><span class="p">,</span><span class="w">
@@ -1014,7 +1603,7 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
             </span><span class="nt">"keywords"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
             </span><span class="nt">"add_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-11-11T18:41:45.807927"</span><span class="p">,</span><span class="w">
             </span><span class="nt">"change_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-02-05T14:23:11.535834"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://DOMINIO_DO_CLIENTE/products/brands/2016/2_0UfItQF.jpg"</span><span class="w">
+            </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/products/brands/2016/2_0UfItQF.jpg"</span><span class="w">
         </span><span class="p">}</span><span class="w">
     </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -1022,7 +1611,7 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET https://DOMINIO_DO_CLIENTE/api/1.0/brands/</code></p>
+<p><code class="prettyprint">GET https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/brands/</code></p>
 
 <h3 id="filtros-via-query-parameters">Filtros via Query Parameters</h3>
 
@@ -1128,17 +1717,17 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET https://DOMINIO_DO_CLIENTE/api/1.0/brands/&lt;ID&gt;/</code></p>
+<p><code class="prettyprint">GET https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/brands/&lt;ID&gt;/</code></p>
 <pre class="highlight python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://DOMINIO_DO_CLIENTE/api/1.0/brands/&lt;ID&gt;/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/brands/&lt;ID&gt;/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
   <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Token </span><span class="si">%</span><span class="s">s'</span> <span class="o">%</span> <span class="n">API_KEY</span>
 <span class="p">})</span>
 
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span>
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 </code></pre>
-<pre class="highlight shell"><code>curl <span class="s2">"https://DOMINIO_DO_CLIENTE/api/1.0/brands/&lt;ID&gt;/"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/brands/&lt;ID&gt;/"</span>
   -H <span class="s2">"Authorization: Token API_KEY"</span>
 </code></pre>
 
@@ -1146,7 +1735,7 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 <p>O comando acima retonar um JSON conforme estrutura abaixo:</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://DOMINIO_DO_CLIENTE/api/1.0/brands/784/"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/brands/784/"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">784</span><span class="p">,</span><span class="w">
     </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ASICS"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"slug"</span><span class="p">:</span><span class="w"> </span><span class="s2">"asics"</span><span class="p">,</span><span class="w">
@@ -1155,7 +1744,7 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
     </span><span class="nt">"keywords"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
     </span><span class="nt">"add_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-11-11T18:41:45.807927"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"change_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-02-05T14:23:11.535834"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://DOMINIO_DO_CLIENTE/products/brands/2016/2_0UfItQF.jpg"</span><span class="w">
+    </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/products/brands/2016/2_0UfItQF.jpg"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
@@ -1247,10 +1836,10 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">POST https://DOMINIO_DO_CLIENTE/api/1.0/brands/</code></p>
+<p><code class="prettyprint">POST https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/brands/</code></p>
 <pre class="highlight python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://DOMINIO_DO_CLIENTE/api/1.0/brands/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/brands/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
   <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Token </span><span class="si">%</span><span class="s">s'</span> <span class="o">%</span> <span class="n">API_KEY</span><span class="p">,</span>
 <span class="p">},</span> <span class="n">files</span><span class="o">=</span><span class="p">{</span>
   <span class="s">'image'</span><span class="p">:</span> <span class="nb">open</span><span class="p">(</span><span class="s">'CAMINHO_LOCAL_DO_ARQUIVO'</span><span class="p">,</span> <span class="s">'rb'</span><span class="p">),</span>
@@ -1262,7 +1851,7 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span>
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 </code></pre>
-<pre class="highlight shell"><code>curl <span class="s2">"https://DOMINIO_DO_CLIENTE/api/1.0/brands/"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/brands/"</span>
   -H <span class="s2">"Authorization: Token API_KEY"</span>
   -H <span class="s2">"Content-Type: multipart/form-data"</span>
   -X POST 
@@ -1275,7 +1864,7 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 <p>O comando acima retonar um JSON conforme estrutura abaixo:</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://DOMINIO_DO_CLIENTE/api/1.0/brands/790/"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/brands/790/"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">790</span><span class="p">,</span><span class="w">
     </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TESTE"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"slug"</span><span class="p">:</span><span class="w"> </span><span class="s2">"teste"</span><span class="p">,</span><span class="w">
@@ -1284,7 +1873,7 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
     </span><span class="nt">"keywords"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
     </span><span class="nt">"add_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-07T19:06:06.076498"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"change_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-07T19:06:06.076534"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://DOMINIO_DO_CLIENTE/products/brands/2016/logo.png"</span><span class="w">
+    </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/products/brands/2016/logo.png"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
@@ -1362,10 +1951,10 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">PUT https://DOMINIO_DO_CLIENTE/api/1.0/brands/&lt;ID&gt;/</code></p>
+<p><code class="prettyprint">PUT https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/brands/&lt;ID&gt;/</code></p>
 <pre class="highlight python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s">'https://DOMINIO_DO_CLIENTE/api/1.0/brands/&lt;ID&gt;/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s">'https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/brands/&lt;ID&gt;/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
   <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Token </span><span class="si">%</span><span class="s">s'</span> <span class="o">%</span> <span class="n">API_KEY</span><span class="p">,</span>
 <span class="p">},</span> <span class="n">files</span><span class="o">=</span><span class="p">{</span>
   <span class="s">'image'</span><span class="p">:</span> <span class="nb">open</span><span class="p">(</span><span class="s">'CAMINHO_LOCAL_DO_ARQUIVO'</span><span class="p">,</span> <span class="s">'rb'</span><span class="p">),</span>
@@ -1377,7 +1966,7 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span>
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 </code></pre>
-<pre class="highlight shell"><code>curl <span class="s2">"https://DOMINIO_DO_CLIENTE/api/1.0/brands/&lt;ID&gt;/"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/brands/&lt;ID&gt;/"</span>
   -H <span class="s2">"Authorization: Token API_KEY"</span>
   -H <span class="s2">"Content-Type: multipart/form-data"</span>
   -X PUT 
@@ -1390,7 +1979,7 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 <p>O comando acima retonar um JSON conforme estrutura abaixo:</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://DOMINIO_DO_CLIENTE/api/1.0/brands/790/"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/brands/790/"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">790</span><span class="p">,</span><span class="w">
     </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TESTE"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"slug"</span><span class="p">:</span><span class="w"> </span><span class="s2">"teste"</span><span class="p">,</span><span class="w">
@@ -1399,7 +1988,7 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
     </span><span class="nt">"keywords"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
     </span><span class="nt">"add_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-07T19:06:06.076498"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"change_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-07T19:06:06.076534"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://DOMINIO_DO_CLIENTE/products/brands/2016/logo.png"</span><span class="w">
+    </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/products/brands/2016/logo.png"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
@@ -1492,14 +2081,14 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 <h2 id="lista">Lista</h2>
 <pre class="highlight python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://DOMINIO_DO_CLIENTE/api/1.0/grids/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/grids/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
   <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Token </span><span class="si">%</span><span class="s">s'</span> <span class="o">%</span> <span class="n">API_KEY</span>
 <span class="p">})</span>
 
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span>
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 </code></pre>
-<pre class="highlight shell"><code>curl <span class="s2">"https://DOMINIO_DO_CLIENTE/api/1.0/grids/"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/grids/"</span>
   -H <span class="s2">"Authorization: Token API_KEY"</span>
 </code></pre>
 
@@ -1508,11 +2097,11 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">41</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"next"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://DOMINIO_DO_CLIENTE/api/1.0/grids/?page=2"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"next"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/grids/?page=2"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"previous"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
     </span><span class="nt">"results"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://DOMINIO_DO_CLIENTE/api/1.0/grids/1/"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/grids/1/"</span><span class="p">,</span><span class="w">
             </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
             </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Esmerilhadeiras"</span><span class="p">,</span><span class="w">
             </span><span class="nt">"display"</span><span class="p">:</span><span class="w"> </span><span class="s2">"radio"</span><span class="p">,</span><span class="w">
@@ -1521,7 +2110,7 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
             </span><span class="nt">"change_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-24T09:53:45.519836"</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://DOMINIO_DO_CLIENTE/api/1.0/grids/2/"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/grids/2/"</span><span class="p">,</span><span class="w">
             </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
             </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Trenas"</span><span class="p">,</span><span class="w">
             </span><span class="nt">"display"</span><span class="p">:</span><span class="w"> </span><span class="s2">"radio"</span><span class="p">,</span><span class="w">
@@ -1535,7 +2124,7 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET https://DOMINIO_DO_CLIENTE/api/1.0/grids/</code></p>
+<p><code class="prettyprint">GET https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/grids/</code></p>
 
 <h3 id="filtros-via-query-parameters">Filtros via Query Parameters</h3>
 
@@ -1629,17 +2218,17 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET https://DOMINIO_DO_CLIENTE/api/1.0/grids/&lt;ID&gt;/</code></p>
+<p><code class="prettyprint">GET https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/grids/&lt;ID&gt;/</code></p>
 <pre class="highlight python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://DOMINIO_DO_CLIENTE/api/1.0/grids/&lt;ID&gt;/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/grids/&lt;ID&gt;/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
   <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Token </span><span class="si">%</span><span class="s">s'</span> <span class="o">%</span> <span class="n">API_KEY</span>
 <span class="p">})</span>
 
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span>
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 </code></pre>
-<pre class="highlight shell"><code>curl <span class="s2">"https://DOMINIO_DO_CLIENTE/api/1.0/grids/&lt;ID&gt;/"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/grids/&lt;ID&gt;/"</span>
   -H <span class="s2">"Authorization: Token API_KEY"</span>
 </code></pre>
 
@@ -1647,7 +2236,7 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 <p>O comando acima retonar um JSON conforme estrutura abaixo:</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://DOMINIO_DO_CLIENTE/api/1.0/grids/2/"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/grids/2/"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
     </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Trenas"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"display"</span><span class="p">:</span><span class="w"> </span><span class="s2">"radio"</span><span class="p">,</span><span class="w">
@@ -1729,10 +2318,10 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">POST https://DOMINIO_DO_CLIENTE/api/1.0/grids/</code></p>
+<p><code class="prettyprint">POST https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/grids/</code></p>
 <pre class="highlight python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://DOMINIO_DO_CLIENTE/api/1.0/grids/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/grids/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
   <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Token </span><span class="si">%</span><span class="s">s'</span> <span class="o">%</span> <span class="n">API_KEY</span><span class="p">,</span>
   <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/json'</span>
 <span class="p">},</span> <span class="n">data</span><span class="o">=&lt;</span><span class="n">JSON</span><span class="o">&gt;</span><span class="p">)</span>
@@ -1740,7 +2329,7 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span>
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 </code></pre>
-<pre class="highlight shell"><code>curl <span class="s2">"https://DOMINIO_DO_CLIENTE/api/1.0/grids/"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/grids/"</span>
   -H <span class="s2">"Authorization: Token API_KEY"</span>
   -H <span class="s2">"Content-Type: application/json"</span>
   -X POST -d <span class="s1">'&lt;JSON&gt;'</span>
@@ -1759,7 +2348,7 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 <p>O comando acima retonar um JSON conforme estrutura abaixo:</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://DOMINIO_DO_CLIENTE/api/1.0/grids/2/"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/grids/2/"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
     </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Trenas"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"display"</span><span class="p">:</span><span class="w"> </span><span class="s2">"radio"</span><span class="p">,</span><span class="w">
@@ -1827,10 +2416,10 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">PUT https://DOMINIO_DO_CLIENTE/api/1.0/grids/&lt;ID&gt;/</code></p>
+<p><code class="prettyprint">PUT https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/grids/&lt;ID&gt;/</code></p>
 <pre class="highlight python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s">'https://DOMINIO_DO_CLIENTE/api/1.0/grids/&lt;ID&gt;/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s">'https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/grids/&lt;ID&gt;/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
   <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Token </span><span class="si">%</span><span class="s">s'</span> <span class="o">%</span> <span class="n">API_KEY</span><span class="p">,</span>
   <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/json'</span>
 <span class="p">},</span> <span class="n">data</span><span class="o">=&lt;</span><span class="n">JSON</span><span class="o">&gt;</span><span class="p">)</span>
@@ -1838,7 +2427,7 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span>
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 </code></pre>
-<pre class="highlight shell"><code>curl <span class="s2">"https://DOMINIO_DO_CLIENTE/api/1.0/grids/&lt;ID&gt;/"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/grids/&lt;ID&gt;/"</span>
   -H <span class="s2">"Authorization: Token API_KEY"</span>
   -H <span class="s2">"Content-Type: application/json"</span>
   -X PUT -d <span class="s1">'&lt;JSON&gt;'</span>
@@ -1857,7 +2446,7 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 <p>O comando acima retonar um JSON conforme estrutura abaixo:</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://DOMINIO_DO_CLIENTE/api/1.0/grids/2/"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/grids/2/"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
     </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Trenas"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"display"</span><span class="p">:</span><span class="w"> </span><span class="s2">"radio"</span><span class="p">,</span><span class="w">
@@ -1940,14 +2529,14 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 <h2 id="lista">Lista</h2>
 <pre class="highlight python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://DOMINIO_DO_CLIENTE/api/1.0/options/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/options/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
   <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Token </span><span class="si">%</span><span class="s">s'</span> <span class="o">%</span> <span class="n">API_KEY</span>
 <span class="p">})</span>
 
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span>
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 </code></pre>
-<pre class="highlight shell"><code>curl <span class="s2">"https://DOMINIO_DO_CLIENTE/api/1.0/options/"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/options/"</span>
   -H <span class="s2">"Authorization: Token API_KEY"</span>
 </code></pre>
 
@@ -1956,11 +2545,11 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"next"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://DOMINIO_DO_CLIENTE/api/1.0/options/?page=2"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"next"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/options/?page=2"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"previous"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
     </span><span class="nt">"results"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://DOMINIO_DO_CLIENTE/api/1.0/options/5/"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/options/5/"</span><span class="p">,</span><span class="w">
             </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
             </span><span class="nt">"grid"</span><span class="p">:</span><span class="w"> </span><span class="mi">43</span><span class="p">,</span><span class="w">
             </span><span class="nt">"position"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
@@ -1974,7 +2563,7 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
             </span><span class="nt">"change_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-11-11T18:06:14.024989"</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://DOMINIO_DO_CLIENTE/api/1.0/options/2/"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/options/2/"</span><span class="p">,</span><span class="w">
             </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
             </span><span class="nt">"grid"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
             </span><span class="nt">"position"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
@@ -1993,7 +2582,7 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET https://DOMINIO_DO_CLIENTE/api/1.0/options/</code></p>
+<p><code class="prettyprint">GET https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/options/</code></p>
 
 <h3 id="filtros-via-query-parameters">Filtros via Query Parameters</h3>
 
@@ -2119,17 +2708,17 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET https://DOMINIO_DO_CLIENTE/api/1.0/options/&lt;ID&gt;/</code></p>
+<p><code class="prettyprint">GET https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/options/&lt;ID&gt;/</code></p>
 <pre class="highlight python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://DOMINIO_DO_CLIENTE/api/1.0/options/&lt;ID&gt;/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/options/&lt;ID&gt;/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
   <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Token </span><span class="si">%</span><span class="s">s'</span> <span class="o">%</span> <span class="n">API_KEY</span>
 <span class="p">})</span>
 
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span>
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 </code></pre>
-<pre class="highlight shell"><code>curl <span class="s2">"https://DOMINIO_DO_CLIENTE/api/1.0/options/&lt;ID&gt;/"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/options/&lt;ID&gt;/"</span>
   -H <span class="s2">"Authorization: Token API_KEY"</span>
 </code></pre>
 
@@ -2137,7 +2726,7 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 <p>O comando acima retonar um JSON conforme estrutura abaixo:</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://DOMINIO_DO_CLIENTE/api/1.0/options/2/"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/options/2/"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
     </span><span class="nt">"grid"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
     </span><span class="nt">"position"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
@@ -2256,10 +2845,10 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">POST https://DOMINIO_DO_CLIENTE/api/1.0/options/</code></p>
+<p><code class="prettyprint">POST https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/options/</code></p>
 <pre class="highlight python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://DOMINIO_DO_CLIENTE/api/1.0/options/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/options/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
   <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Token </span><span class="si">%</span><span class="s">s'</span> <span class="o">%</span> <span class="n">API_KEY</span><span class="p">,</span>
   <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/json'</span>
 <span class="p">},</span> <span class="n">data</span><span class="o">=&lt;</span><span class="n">JSON</span><span class="o">&gt;</span><span class="p">)</span>
@@ -2267,7 +2856,7 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span>
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 </code></pre>
-<pre class="highlight shell"><code>curl <span class="s2">"https://DOMINIO_DO_CLIENTE/api/1.0/options/"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/options/"</span>
   -H <span class="s2">"Authorization: Token API_KEY"</span>
   -H <span class="s2">"Content-Type: application/json"</span>
   -X POST -d <span class="s1">'&lt;JSON&gt;'</span>
@@ -2288,7 +2877,7 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 <p>O comando acima retonar um JSON conforme estrutura abaixo:</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://DOMINIO_DO_CLIENTE/api/1.0/options/2/"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/options/2/"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
     </span><span class="nt">"grid"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
     </span><span class="nt">"position"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
@@ -2393,10 +2982,10 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">PUT https://DOMINIO_DO_CLIENTE/api/1.0/options/&lt;ID&gt;/</code></p>
+<p><code class="prettyprint">PUT https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/options/&lt;ID&gt;/</code></p>
 <pre class="highlight python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s">'https://DOMINIO_DO_CLIENTE/api/1.0/options/&lt;ID&gt;/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s">'https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/options/&lt;ID&gt;/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
   <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Token </span><span class="si">%</span><span class="s">s'</span> <span class="o">%</span> <span class="n">API_KEY</span><span class="p">,</span>
   <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/json'</span>
 <span class="p">},</span> <span class="n">data</span><span class="o">=&lt;</span><span class="n">JSON</span><span class="o">&gt;</span><span class="p">)</span>
@@ -2404,7 +2993,7 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span>
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 </code></pre>
-<pre class="highlight shell"><code>curl <span class="s2">"https://DOMINIO_DO_CLIENTE/api/1.0/options/&lt;ID&gt;/"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/options/&lt;ID&gt;/"</span>
   -H <span class="s2">"Authorization: Token API_KEY"</span>
   -H <span class="s2">"Content-Type: application/json"</span>
   -X PUT -d <span class="s1">'&lt;JSON&gt;'</span>
@@ -2425,7 +3014,7 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 <p>O comando acima retonar um JSON conforme estrutura abaixo:</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://DOMINIO_DO_CLIENTE/api/1.0/options/2/"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/options/2/"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
     </span><span class="nt">"grid"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
     </span><span class="nt">"position"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
@@ -2545,14 +3134,14 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 <h2 id="lista">Lista</h2>
 <pre class="highlight python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://DOMINIO_DO_CLIENTE/api/1.0/values/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/values/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
   <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Token </span><span class="si">%</span><span class="s">s'</span> <span class="o">%</span> <span class="n">API_KEY</span>
 <span class="p">})</span>
 
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span>
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 </code></pre>
-<pre class="highlight shell"><code>curl <span class="s2">"https://DOMINIO_DO_CLIENTE/api/1.0/values/"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/values/"</span>
   -H <span class="s2">"Authorization: Token API_KEY"</span>
 </code></pre>
 
@@ -2561,11 +3150,11 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"next"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://DOMINIO_DO_CLIENTE/api/1.0/values/?page=2"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"next"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/values/?page=2"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"previous"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
     </span><span class="nt">"results"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://DOMINIO_DO_CLIENTE/api/1.0/values/14/"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/values/14/"</span><span class="p">,</span><span class="w">
             </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">14</span><span class="p">,</span><span class="w">
             </span><span class="nt">"option"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
             </span><span class="nt">"position"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
@@ -2576,7 +3165,7 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
             </span><span class="nt">"change_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-11-11T18:38:46.746944"</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://DOMINIO_DO_CLIENTE/api/1.0/values/15/"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/values/15/"</span><span class="p">,</span><span class="w">
             </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w">
             </span><span class="nt">"option"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
             </span><span class="nt">"position"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
@@ -2592,7 +3181,7 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET https://DOMINIO_DO_CLIENTE/api/1.0/values/</code></p>
+<p><code class="prettyprint">GET https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/values/</code></p>
 
 <h3 id="filtros-via-query-parameters">Filtros via Query Parameters</h3>
 
@@ -2694,17 +3283,17 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET https://DOMINIO_DO_CLIENTE/api/1.0/values/&lt;ID&gt;/</code></p>
+<p><code class="prettyprint">GET https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/values/&lt;ID&gt;/</code></p>
 <pre class="highlight python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://DOMINIO_DO_CLIENTE/api/1.0/values/&lt;ID&gt;/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/values/&lt;ID&gt;/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
   <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Token </span><span class="si">%</span><span class="s">s'</span> <span class="o">%</span> <span class="n">API_KEY</span>
 <span class="p">})</span>
 
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span>
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 </code></pre>
-<pre class="highlight shell"><code>curl <span class="s2">"https://DOMINIO_DO_CLIENTE/api/1.0/values/&lt;ID&gt;/"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/values/&lt;ID&gt;/"</span>
   -H <span class="s2">"Authorization: Token API_KEY"</span>
 </code></pre>
 
@@ -2712,7 +3301,7 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 <p>O comando acima retonar um JSON conforme estrutura abaixo:</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://DOMINIO_DO_CLIENTE/api/1.0/values/15/"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/values/15/"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w">
     </span><span class="nt">"option"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
     </span><span class="nt">"position"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
@@ -2804,10 +3393,10 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">POST https://DOMINIO_DO_CLIENTE/api/1.0/values/</code></p>
+<p><code class="prettyprint">POST https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/values/</code></p>
 <pre class="highlight python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://DOMINIO_DO_CLIENTE/api/1.0/values/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/values/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
   <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Token </span><span class="si">%</span><span class="s">s'</span> <span class="o">%</span> <span class="n">API_KEY</span><span class="p">,</span>
   <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/json'</span>
 <span class="p">},</span> <span class="n">data</span><span class="o">=&lt;</span><span class="n">JSON</span><span class="o">&gt;</span><span class="p">)</span>
@@ -2815,7 +3404,7 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span>
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 </code></pre>
-<pre class="highlight shell"><code>curl <span class="s2">"https://DOMINIO_DO_CLIENTE/api/1.0/values/"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/values/"</span>
   -H <span class="s2">"Authorization: Token API_KEY"</span>
   -H <span class="s2">"Content-Type: application/json"</span>
   -X POST -d <span class="s1">'&lt;JSON&gt;'</span>
@@ -2834,7 +3423,7 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 <p>O comando acima retonar um JSON conforme estrutura abaixo:</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://DOMINIO_DO_CLIENTE/api/1.0/values/14/"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/values/14/"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">14</span><span class="p">,</span><span class="w">
     </span><span class="nt">"option"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
     </span><span class="nt">"position"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
@@ -2912,10 +3501,10 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">PUT https://DOMINIO_DO_CLIENTE/api/1.0/values/&lt;ID&gt;/</code></p>
+<p><code class="prettyprint">PUT https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/values/&lt;ID&gt;/</code></p>
 <pre class="highlight python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s">'https://DOMINIO_DO_CLIENTE/api/1.0/values/&lt;ID&gt;/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s">'https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/values/&lt;ID&gt;/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
   <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Token </span><span class="si">%</span><span class="s">s'</span> <span class="o">%</span> <span class="n">API_KEY</span><span class="p">,</span>
   <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/json'</span>
 <span class="p">},</span> <span class="n">data</span><span class="o">=&lt;</span><span class="n">JSON</span><span class="o">&gt;</span><span class="p">)</span>
@@ -2923,7 +3512,7 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span>
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 </code></pre>
-<pre class="highlight shell"><code>curl <span class="s2">"https://DOMINIO_DO_CLIENTE/api/1.0/values/&lt;ID&gt;/"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/values/&lt;ID&gt;/"</span>
   -H <span class="s2">"Authorization: Token API_KEY"</span>
   -H <span class="s2">"Content-Type: application/json"</span>
   -X PUT -d <span class="s1">'&lt;JSON&gt;'</span>
@@ -2942,7 +3531,7 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 <p>O comando acima retonar um JSON conforme estrutura abaixo:</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://DOMINIO_DO_CLIENTE/api/1.0/values/14/"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/values/14/"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">14</span><span class="p">,</span><span class="w">
     </span><span class="nt">"option"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
     </span><span class="nt">"position"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
@@ -3035,14 +3624,14 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 <h2 id="lista">Lista</h2>
 <pre class="highlight python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://DOMINIO_DO_CLIENTE/api/1.0/specifications/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/specifications/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
   <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Token </span><span class="si">%</span><span class="s">s'</span> <span class="o">%</span> <span class="n">API_KEY</span>
 <span class="p">})</span>
 
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span>
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 </code></pre>
-<pre class="highlight shell"><code>curl <span class="s2">"https://DOMINIO_DO_CLIENTE/api/1.0/specifications/"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/specifications/"</span>
   -H <span class="s2">"Authorization: Token API_KEY"</span>
 </code></pre>
 
@@ -3051,11 +3640,11 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"next"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://DOMINIO_DO_CLIENTE/api/1.0/specifications/?page=2"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"next"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/specifications/?page=2"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"previous"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
     </span><span class="nt">"results"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://DOMINIO_DO_CLIENTE/api/1.0/specifications/4/"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/specifications/4/"</span><span class="p">,</span><span class="w">
             </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
             </span><span class="nt">"grid"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w">
             </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Encaixe"</span><span class="p">,</span><span class="w">
@@ -3066,7 +3655,7 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
             </span><span class="nt">"change_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-12-09T20:23:21.908761"</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://DOMINIO_DO_CLIENTE/api/1.0/specifications/2/"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/specifications/2/"</span><span class="p">,</span><span class="w">
             </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
             </span><span class="nt">"grid"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
             </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rotação"</span><span class="p">,</span><span class="w">
@@ -3082,7 +3671,7 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET https://DOMINIO_DO_CLIENTE/api/1.0/specifications/</code></p>
+<p><code class="prettyprint">GET https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/specifications/</code></p>
 
 <h3 id="filtros-via-query-parameters">Filtros via Query Parameters</h3>
 
@@ -3180,17 +3769,17 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET https://DOMINIO_DO_CLIENTE/api/1.0/specifications/&lt;ID&gt;/</code></p>
+<p><code class="prettyprint">GET https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/specifications/&lt;ID&gt;/</code></p>
 <pre class="highlight python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://DOMINIO_DO_CLIENTE/api/1.0/specifications/&lt;ID&gt;/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/specifications/&lt;ID&gt;/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
   <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Token </span><span class="si">%</span><span class="s">s'</span> <span class="o">%</span> <span class="n">API_KEY</span>
 <span class="p">})</span>
 
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span>
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 </code></pre>
-<pre class="highlight shell"><code>curl <span class="s2">"https://DOMINIO_DO_CLIENTE/api/1.0/specifications/&lt;ID&gt;/"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/specifications/&lt;ID&gt;/"</span>
   -H <span class="s2">"Authorization: Token API_KEY"</span>
 </code></pre>
 
@@ -3198,7 +3787,7 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 <p>O comando acima retonar um JSON conforme estrutura abaixo:</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://DOMINIO_DO_CLIENTE/api/1.0/specifications/2/"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/specifications/2/"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
     </span><span class="nt">"grid"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
     </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rotação"</span><span class="p">,</span><span class="w">
@@ -3290,10 +3879,10 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">POST https://DOMINIO_DO_CLIENTE/api/1.0/specifications/</code></p>
+<p><code class="prettyprint">POST https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/specifications/</code></p>
 <pre class="highlight python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://DOMINIO_DO_CLIENTE/api/1.0/specifications/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/specifications/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
   <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Token </span><span class="si">%</span><span class="s">s'</span> <span class="o">%</span> <span class="n">API_KEY</span><span class="p">,</span>
   <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/json'</span>
 <span class="p">},</span> <span class="n">data</span><span class="o">=&lt;</span><span class="n">JSON</span><span class="o">&gt;</span><span class="p">)</span>
@@ -3301,7 +3890,7 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span>
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 </code></pre>
-<pre class="highlight shell"><code>curl <span class="s2">"https://DOMINIO_DO_CLIENTE/api/1.0/specifications/"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/specifications/"</span>
   -H <span class="s2">"Authorization: Token API_KEY"</span>
   -H <span class="s2">"Content-Type: application/json"</span>
   -X POST -d <span class="s1">'&lt;JSON&gt;'</span>
@@ -3320,7 +3909,7 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 <p>O comando acima retonar um JSON conforme estrutura abaixo:</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://DOMINIO_DO_CLIENTE/api/1.0/specifications/2/"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/specifications/2/"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
     </span><span class="nt">"grid"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
     </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rotação"</span><span class="p">,</span><span class="w">
@@ -3398,10 +3987,10 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">PUT https://DOMINIO_DO_CLIENTE/api/1.0/specifications/&lt;ID&gt;/</code></p>
+<p><code class="prettyprint">PUT https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/specifications/&lt;ID&gt;/</code></p>
 <pre class="highlight python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s">'https://DOMINIO_DO_CLIENTE/api/1.0/specifications/&lt;ID&gt;/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s">'https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/specifications/&lt;ID&gt;/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
   <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Token </span><span class="si">%</span><span class="s">s'</span> <span class="o">%</span> <span class="n">API_KEY</span><span class="p">,</span>
   <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/json'</span>
 <span class="p">},</span> <span class="n">data</span><span class="o">=&lt;</span><span class="n">JSON</span><span class="o">&gt;</span><span class="p">)</span>
@@ -3409,7 +3998,7 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span>
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 </code></pre>
-<pre class="highlight shell"><code>curl <span class="s2">"https://DOMINIO_DO_CLIENTE/api/1.0/specifications/&lt;ID&gt;/"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/specifications/&lt;ID&gt;/"</span>
   -H <span class="s2">"Authorization: Token API_KEY"</span>
   -H <span class="s2">"Content-Type: application/json"</span>
   -X PUT -d <span class="s1">'&lt;JSON&gt;'</span>
@@ -3428,7 +4017,7 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 <p>O comando acima retonar um JSON conforme estrutura abaixo:</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://DOMINIO_DO_CLIENTE/api/1.0/specifications/2/"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/specifications/2/"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
     </span><span class="nt">"grid"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
     </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rotação"</span><span class="p">,</span><span class="w">
@@ -3697,14 +4286,14 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 <h3 id="lista-de-produtos">Lista de Produtos</h3>
 <pre class="highlight python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://DOMINIO_DO_CLIENTE/api/1.0/products/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/products/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
   <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Token </span><span class="si">%</span><span class="s">s'</span> <span class="o">%</span> <span class="n">API_KEY</span>
 <span class="p">})</span>
 
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span>
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 </code></pre>
-<pre class="highlight shell"><code>curl <span class="s2">"https://DOMINIO_DO_CLIENTE/api/1.0/products/"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/products/"</span>
   -H <span class="s2">"Authorization: Token API_KEY"</span>
 </code></pre>
 
@@ -3713,7 +4302,7 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">1606</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"next"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://DOMINIO_DO_CLIENTE/api/1.0/products/?page=2"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"next"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/products/?page=2"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"previous"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
     </span><span class="nt">"results"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
@@ -3790,7 +4379,7 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET https://DOMINIO_DO_CLIENTE/api/1.0/products/</code></p>
+<p><code class="prettyprint">GET https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/products/</code></p>
 
 <h3 id="filtros-via-query-parameters">Filtros via Query Parameters</h3>
 
@@ -3834,17 +4423,17 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET https://DOMINIO_DO_CLIENTE/api/1.0/products/&lt;ID&gt;/</code></p>
+<p><code class="prettyprint">GET https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/products/&lt;ID&gt;/</code></p>
 <pre class="highlight python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://DOMINIO_DO_CLIENTE/api/1.0/products/&lt;ID&gt;/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/products/&lt;ID&gt;/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
   <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Token </span><span class="si">%</span><span class="s">s'</span> <span class="o">%</span> <span class="n">API_KEY</span>
 <span class="p">})</span>
 
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span>
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 </code></pre>
-<pre class="highlight shell"><code>curl <span class="s2">"https://DOMINIO_DO_CLIENTE/api/1.0/products/&lt;ID&gt;/"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/products/&lt;ID&gt;/"</span>
   -H <span class="s2">"Authorization: Token API_KEY"</span>
 </code></pre>
 
@@ -3906,10 +4495,10 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">POST https://DOMINIO_DO_CLIENTE/api/1.0/products/</code></p>
+<p><code class="prettyprint">POST https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/products/</code></p>
 <pre class="highlight python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://DOMINIO_DO_CLIENTE/api/1.0/products/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/products/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
   <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Token </span><span class="si">%</span><span class="s">s'</span> <span class="o">%</span> <span class="n">API_KEY</span><span class="p">,</span>
   <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/json'</span>
 <span class="p">},</span> <span class="n">data</span><span class="o">=&lt;</span><span class="n">JSON</span><span class="o">&gt;</span><span class="p">)</span>
@@ -3917,7 +4506,7 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span>
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 </code></pre>
-<pre class="highlight shell"><code>curl <span class="s2">"https://DOMINIO_DO_CLIENTE/api/1.0/products/"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/products/"</span>
   -H <span class="s2">"Authorization: Token API_KEY"</span>
   -H <span class="s2">"Content-Type: application/json"</span>
   -X POST -d <span class="s1">'&lt;JSON&gt;'</span>
@@ -4002,10 +4591,10 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">PUT https://DOMINIO_DO_CLIENTE/api/1.0/products/&lt;ID&gt;/</code></p>
+<p><code class="prettyprint">PUT https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/products/&lt;ID&gt;/</code></p>
 <pre class="highlight python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s">'https://DOMINIO_DO_CLIENTE/api/1.0/products/&lt;ID&gt;/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s">'https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/products/&lt;ID&gt;/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
   <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Token </span><span class="si">%</span><span class="s">s'</span> <span class="o">%</span> <span class="n">API_KEY</span><span class="p">,</span>
   <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/json'</span>
 <span class="p">},</span> <span class="n">data</span><span class="o">=&lt;</span><span class="n">JSON</span><span class="o">&gt;</span><span class="p">)</span>
@@ -4013,7 +4602,7 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span>
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 </code></pre>
-<pre class="highlight shell"><code>curl <span class="s2">"https://DOMINIO_DO_CLIENTE/api/1.0/products/&lt;ID&gt;/"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/products/&lt;ID&gt;/"</span>
   -H <span class="s2">"Authorization: Token API_KEY"</span>
   -H <span class="s2">"Content-Type: application/json"</span>
   -X PUT -d <span class="s1">'&lt;JSON&gt;'</span>
@@ -4304,14 +4893,14 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 <h3 id="lista-de-sku-s">Lista de SKU`s</h3>
 <pre class="highlight python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'http://DOMINIO_DO_CLIENTE/api/1.0/skus/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/skus/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
   <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Token </span><span class="si">%</span><span class="s">s'</span> <span class="o">%</span> <span class="n">API_KEY</span>
 <span class="p">})</span>
 
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span>
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 </code></pre>
-<pre class="highlight shell"><code>curl <span class="s2">"http://DOMINIO_DO_CLIENTE/api/1.0/skus/"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/skus/"</span>
   -H <span class="s2">"Authorization: Token API_KEY"</span>
 </code></pre>
 
@@ -4387,7 +4976,7 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET http://DOMINIO_DO_CLIENTE/api/1.0/skus/</code></p>
+<p><code class="prettyprint">GET https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/skus/</code></p>
 
 <h3 id="filtros-via-query-parameters">Filtros via Query Parameters</h3>
 
@@ -4431,17 +5020,17 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET http://DOMINIO_DO_CLIENTE/api/1.0/skus/&lt;ID&gt;/</code></p>
+<p><code class="prettyprint">GET https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/skus/&lt;ID&gt;/</code></p>
 <pre class="highlight python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'http://DOMINIO_DO_CLIENTE/api/1.0/skus/&lt;ID&gt;/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/skus/&lt;ID&gt;/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
   <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Token </span><span class="si">%</span><span class="s">s'</span> <span class="o">%</span> <span class="n">API_KEY</span>
 <span class="p">})</span>
 
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span>
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 </code></pre>
-<pre class="highlight shell"><code>curl <span class="s2">"http://DOMINIO_DO_CLIENTE/api/1.0/skus/&lt;ID&gt;/"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/skus/&lt;ID&gt;/"</span>
   -H <span class="s2">"Authorization: Token API_KEY"</span>
 </code></pre>
 
@@ -4497,10 +5086,10 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">POST http://DOMINIO_DO_CLIENTE/api/1.0/skus/</code></p>
+<p><code class="prettyprint">POST https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/skus/</code></p>
 <pre class="highlight python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">'http://DOMINIO_DO_CLIENTE/api/1.0/skus/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/skus/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
   <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Token </span><span class="si">%</span><span class="s">s'</span> <span class="o">%</span> <span class="n">API_KEY</span><span class="p">,</span>
   <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/json'</span>
 <span class="p">},</span> <span class="n">data</span><span class="o">=&lt;</span><span class="n">JSON</span><span class="o">&gt;</span><span class="p">)</span>
@@ -4508,7 +5097,7 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span>
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 </code></pre>
-<pre class="highlight shell"><code>curl <span class="s2">"http://DOMINIO_DO_CLIENTE/api/1.0/skus/"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/skus/"</span>
   -H <span class="s2">"Authorization: Token API_KEY"</span>
   -H <span class="s2">"Content-Type: application/json"</span>
   -X POST -d <span class="s1">'&lt;JSON&gt;'</span>
@@ -4572,10 +5161,10 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">PUT http://DOMINIO_DO_CLIENTE/api/1.0/skus/&lt;ID&gt;/</code></p>
+<p><code class="prettyprint">PUT https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/skus/&lt;ID&gt;/</code></p>
 <pre class="highlight python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s">'http://DOMINIO_DO_CLIENTE/api/1.0/skus/&lt;ID&gt;/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s">'https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/skus/&lt;ID&gt;/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
   <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Token </span><span class="si">%</span><span class="s">s'</span> <span class="o">%</span> <span class="n">API_KEY</span><span class="p">,</span>
   <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/json'</span>
 <span class="p">},</span> <span class="n">data</span><span class="o">=&lt;</span><span class="n">JSON</span><span class="o">&gt;</span><span class="p">)</span>
@@ -4583,7 +5172,7 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span>
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 </code></pre>
-<pre class="highlight shell"><code>curl <span class="s2">"http://DOMINIO_DO_CLIENTE/api/1.0/skus/&lt;ID&gt;/"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/skus/&lt;ID&gt;/"</span>
   -H <span class="s2">"Authorization: Token API_KEY"</span>
   -H <span class="s2">"Content-Type: application/json"</span>
   -X PUT -d <span class="s1">'&lt;JSON&gt;'</span>
@@ -5230,14 +5819,14 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 <h3 id="lista-de-pedidos">Lista de pedidos</h3>
 <pre class="highlight python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://DOMINIO_DO_CLIENTE/api/1.0/orders/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/orders/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
   <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Token </span><span class="si">%</span><span class="s">s'</span> <span class="o">%</span> <span class="n">API_KEY</span>
 <span class="p">})</span>
 
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span>
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 </code></pre>
-<pre class="highlight shell"><code>curl <span class="s2">"https://DOMINIO_DO_CLIENTE/api/1.0/orders/"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/orders/"</span>
   -H <span class="s2">"Authorization: Token API_KEY"</span>
 </code></pre>
 
@@ -5246,7 +5835,7 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">114</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"next"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://DOMINIO_DO_CLIENTE/api/1.0/orders/?page=2"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"next"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/orders/?page=2"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"previous"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
     </span><span class="nt">"results"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
@@ -5408,7 +5997,7 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 <h3 id="http-request">HTTP Request</h3>
 
 <aside class="request">
-    <span class="method post">GET</span><span class="endpoint">https://DOMINIO_DO_CLIENTE/api/1.0/orders/</span>
+    <span class="method post">GET</span><span class="endpoint">https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/orders/</span>
 </aside>
 
 <h3 id="filtros-via-query-parameters">Filtros via Query Parameters</h3>
@@ -5454,18 +6043,18 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 <h3 id="http-request">HTTP Request</h3>
 
 <aside class="request">
-    <span class="method post">GET</span><span class="endpoint">https://DOMINIO_DO_CLIENTE/api/1.0/orders/ID/</span>
+    <span class="method post">GET</span><span class="endpoint">https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/orders/ID/</span>
 </aside>
 <pre class="highlight python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://DOMINIO_DO_CLIENTE/api/1.0/orders/&lt;ID&gt;/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/orders/&lt;ID&gt;/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
   <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Token </span><span class="si">%</span><span class="s">s'</span> <span class="o">%</span> <span class="n">API_KEY</span>
 <span class="p">})</span>
 
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span>
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 </code></pre>
-<pre class="highlight shell"><code>curl <span class="s2">"https://DOMINIO_DO_CLIENTE/api/1.0/orders/&lt;ID&gt;/"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/orders/&lt;ID&gt;/"</span>
   -H <span class="s2">"Authorization: Token API_KEY"</span>
 </code></pre>
 
@@ -5569,11 +6158,11 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 <h3 id="http-request">HTTP Request</h3>
 
 <aside class="request">
-    <span class="method put">PUT</span><span class="endpoint">https://DOMINIO_DO_CLIENTE/api/1.0/orders/ID/status/</span>
+    <span class="method put">PUT</span><span class="endpoint">https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/orders/ID/status/</span>
 </aside>
 <pre class="highlight python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s">'https://DOMINIO_DO_CLIENTE/api/1.0/orders/&lt;ID&gt;/status/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s">'https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/orders/&lt;ID&gt;/status/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
   <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Token </span><span class="si">%</span><span class="s">s'</span> <span class="o">%</span> <span class="n">API_KEY</span><span class="p">,</span>
   <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/json'</span>
 <span class="p">},</span> <span class="n">data</span><span class="o">=&lt;</span><span class="n">JSON</span><span class="o">&gt;</span><span class="p">)</span>
@@ -5581,7 +6170,7 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span>
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 </code></pre>
-<pre class="highlight shell"><code>curl <span class="s2">"https://DOMINIO_DO_CLIENTE/api/1.0/orders/&lt;ID&gt;/status/"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/orders/&lt;ID&gt;/status/"</span>
   -H <span class="s2">"Authorization: Token API_KEY"</span>
   -H <span class="s2">"Content-Type: application/json"</span>
   -X PUT -d <span class="s1">'&lt;JSON&gt;'</span>
@@ -5684,11 +6273,11 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 <h3 id="http-request-create">HTTP Request Create</h3>
 
 <aside class="request">
-    <span class="method post">POST</span><span class="endpoint">https://DOMINIO_DO_CLIENTE/api/1.0/orders/ID/trackers/</span>
+    <span class="method post">POST</span><span class="endpoint">https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/orders/ID/trackers/</span>
 </aside>
 <pre class="highlight python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s">'https://DOMINIO_DO_CLIENTE/api/1.0/orders/&lt;ID&gt;/trackers/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s">'https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/orders/&lt;ID&gt;/trackers/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
   <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Token </span><span class="si">%</span><span class="s">s'</span> <span class="o">%</span> <span class="n">API_KEY</span><span class="p">,</span>
   <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/json'</span>
 <span class="p">},</span> <span class="n">data</span><span class="o">=&lt;</span><span class="n">JSON</span><span class="o">&gt;</span><span class="p">)</span>
@@ -5696,7 +6285,7 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span>
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 </code></pre>
-<pre class="highlight shell"><code>curl <span class="s2">"https://DOMINIO_DO_CLIENTE/api/1.0/orders/&lt;ID&gt;/trackers/"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/orders/&lt;ID&gt;/trackers/"</span>
   -H <span class="s2">"Authorization: Token API_KEY"</span>
   -H <span class="s2">"Content-Type: application/json"</span>
   -X PUT -d <span class="s1">'&lt;JSON&gt;'</span>
@@ -5803,11 +6392,11 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 <h3 id="http-request-delete">HTTP Request Delete</h3>
 
 <aside class="request">
-    <span class="method delete">DELETE</span><span class="endpoint">https://DOMINIO_DO_CLIENTE/api/1.0/orders/ID/trackers/TRACKER_ID/</span>
+    <span class="method delete">DELETE</span><span class="endpoint">https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/orders/ID/trackers/TRACKER_ID/</span>
 </aside>
 <pre class="highlight python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s">'https://DOMINIO_DO_CLIENTE/api/1.0/orders/&lt;ID&gt;/trackers/&lt;TRACKER_ID&gt;/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s">'https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/orders/&lt;ID&gt;/trackers/&lt;TRACKER_ID&gt;/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
   <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Token </span><span class="si">%</span><span class="s">s'</span> <span class="o">%</span> <span class="n">API_KEY</span><span class="p">,</span>
   <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/json'</span>
 <span class="p">})</span>
@@ -5815,7 +6404,7 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span>
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 </code></pre>
-<pre class="highlight shell"><code>curl <span class="s2">"https://DOMINIO_DO_CLIENTE/api/1.0/orders/&lt;ID&gt;/trackers/&lt;TRACKER_ID&gt;/"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/orders/&lt;ID&gt;/trackers/&lt;TRACKER_ID&gt;/"</span>
   -H <span class="s2">"Authorization: Token API_KEY"</span>
   -H <span class="s2">"Content-Type: application/json"</span>
   -X DELETE
@@ -5920,11 +6509,11 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 <h3 id="http-request-create">HTTP Request Create</h3>
 
 <aside class="request">
-    <span class="method post">POST</span><span class="endpoint">https://DOMINIO_DO_CLIENTE/api/1.0/orders/ID/invoices/</span>
+    <span class="method post">POST</span><span class="endpoint">https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/orders/ID/invoices/</span>
 </aside>
 <pre class="highlight python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://DOMINIO_DO_CLIENTE/api/1.0/orders/&lt;ID&gt;/invoices/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/orders/&lt;ID&gt;/invoices/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
   <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Token </span><span class="si">%</span><span class="s">s'</span> <span class="o">%</span> <span class="n">API_KEY</span><span class="p">,</span>
   <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/json'</span>
 <span class="p">},</span> <span class="n">data</span><span class="o">=&lt;</span><span class="n">JSON</span><span class="o">&gt;</span><span class="p">)</span>
@@ -5932,7 +6521,7 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span>
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 </code></pre>
-<pre class="highlight shell"><code>curl <span class="s2">"https://DOMINIO_DO_CLIENTE/api/1.0/orders/&lt;ID&gt;/invoices/"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/orders/&lt;ID&gt;/invoices/"</span>
   -H <span class="s2">"Authorization: Token API_KEY"</span>
   -H <span class="s2">"Content-Type: application/json"</span>
   -X POST -d <span class="s1">'&lt;JSON&gt;'</span>
@@ -5984,11 +6573,11 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 <h3 id="http-request-delete">HTTP Request Delete</h3>
 
 <aside class="request">
-    <span class="method delete">DELETE</span><span class="endpoint">https://DOMINIO_DO_CLIENTE/api/1.0/orders/ID/trackers/INVOICE_ID/</span>
+    <span class="method delete">DELETE</span><span class="endpoint">https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/orders/ID/trackers/INVOICE_ID/</span>
 </aside>
 <pre class="highlight python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s">'https://DOMINIO_DO_CLIENTE/api/1.0/orders/&lt;ID&gt;/trackers/&lt;INVOICE_ID&gt;/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s">'https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/orders/&lt;ID&gt;/trackers/&lt;INVOICE_ID&gt;/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
   <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Token </span><span class="si">%</span><span class="s">s'</span> <span class="o">%</span> <span class="n">API_KEY</span><span class="p">,</span>
   <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/json'</span>
 <span class="p">})</span>
@@ -5996,7 +6585,7 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span>
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 </code></pre>
-<pre class="highlight shell"><code>curl <span class="s2">"https://DOMINIO_DO_CLIENTE/api/1.0/orders/&lt;ID&gt;/trackers/&lt;INVOICE_ID&gt;/"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/orders/&lt;ID&gt;/trackers/&lt;INVOICE_ID&gt;/"</span>
   -H <span class="s2">"Authorization: Token API_KEY"</span>
   -H <span class="s2">"Content-Type: application/json"</span>
   -X DELETE
@@ -6029,8 +6618,9 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
       </div>
       <div class="dark-box">
           <div class="lang-selector">
-                <a href="#" data-language-name="python">python</a>
-                <a href="#" data-language-name="shell">shell</a>
+                <a href="#" data-language-name="csharp">C#</a>
+                <a href="#" data-language-name="shell">cURL</a>
+                <a href="#" data-language-name="python">Python</a>
           </div>
       </div>
     </div>
