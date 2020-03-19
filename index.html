@@ -8284,6 +8284,1463 @@ product=2020562
 </tr>
 </tbody></table>
 
+          <h1 id="log-stica-estoques">Logística - Estoques</h1>
+
+<h2 id="lista">Lista</h2>
+<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://api.convertize.com.br/{ENVIRONMENT}/v2/logistics/stocks/skus/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+  <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Token </span><span class="si">%</span><span class="s">s'</span> <span class="o">%</span> <span class="n">API_KEY</span>
+<span class="p">})</span>
+
+<span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span>
+<span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</code></pre>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/v2/logistics/stocks/skus/"</span>
+  -H <span class="s2">"Authorization: Token API_KEY"</span>
+</code></pre>
+
+<blockquote>
+<p>O comando acima retonar um JSON conforme estrutura abaixo:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"next"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"previous"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"results"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"stock"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="mi">1676</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"infinity"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"stock"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="mi">1669</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"infinity"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"stock"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"infinity"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"stock"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"infinity"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"stock"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"infinity"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"stock"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"infinity"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<aside class="request">
+    <span class="method get">GET</span><span class="endpoint">/{ENVIRONMENT}/api/v2/logistics/stocks/skus/</span>
+</aside>
+
+<h3 id="filtros-via-query-parameters">Filtros via Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>Filtro pelo ID do estoque</td>
+</tr>
+<tr>
+<td>sku</td>
+<td>Filtro pelo ID do SKU</td>
+</tr>
+<tr>
+<td>sku__in</td>
+<td>Filtro pela lista de ID do SKU separados por ,</td>
+</tr>
+<tr>
+<td>quantity__gte</td>
+<td>Filtro por data de criação maior ou igual</td>
+</tr>
+<tr>
+<td>quantity__lte</td>
+<td>Filtro por data de alteração menor ou igual</td>
+</tr>
+</tbody></table>
+
+<h3 id="descri-o-dos-campos">Descrição dos campos</h3>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Requerido</th>
+<th>Unico</th>
+<th>Tipo do Campo</th>
+<th>Max Caracteres</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td></td>
+<td>*</td>
+<td>Int4</td>
+<td>-</td>
+<td>ID do Stock</td>
+</tr>
+<tr>
+<td>sku</td>
+<td></td>
+<td>*</td>
+<td>Int4</td>
+<td>-</td>
+<td>ID do SKU</td>
+</tr>
+<tr>
+<td>quantity</td>
+<td></td>
+<td>*</td>
+<td>Int4</td>
+<td>-</td>
+<td>Estoque</td>
+</tr>
+<tr>
+<td>infinity</td>
+<td></td>
+<td>*</td>
+<td>Boolean</td>
+<td>1</td>
+<td>Indica se o estoque é infinito default = false</td>
+</tr>
+</tbody></table>
+
+<h2 id="detalhes">Detalhes</h2>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<aside class="request">
+    <span class="method get">GET</span><span class="endpoint">/{ENVIRONMENT}/api/v2/logistics/stocks/skus/{ID}/</span>
+</aside>
+<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://api.convertize.com.br/{ENVIRONMENT}/api/v2/logistics/stocks/skus/&lt;ID&gt;/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+  <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Token </span><span class="si">%</span><span class="s">s'</span> <span class="o">%</span> <span class="n">API_KEY</span>
+<span class="p">})</span>
+
+<span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span>
+<span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</code></pre>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/v2/logistics/stocks/skus/&lt;ID&gt;/"</span>
+  -H <span class="s2">"Authorization: Token API_KEY"</span>
+</code></pre>
+
+<blockquote>
+<p>O comando acima retonar um JSON conforme estrutura abaixo:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"stock"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="mi">1676</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"infinity"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h3 id="url-parameters">URL Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ID</td>
+<td>ID relativo ao Estoque</td>
+</tr>
+</tbody></table>
+
+<h3 id="descri-o-dos-campos">Descrição dos campos</h3>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Requerido</th>
+<th>Unico</th>
+<th>Tipo do Campo</th>
+<th>Max Caracteres</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td></td>
+<td>*</td>
+<td>Int4</td>
+<td>-</td>
+<td>ID do Stock</td>
+</tr>
+<tr>
+<td>sku</td>
+<td></td>
+<td>*</td>
+<td>Int4</td>
+<td>-</td>
+<td>ID do SKU</td>
+</tr>
+<tr>
+<td>quantity</td>
+<td></td>
+<td>*</td>
+<td>Int4</td>
+<td>-</td>
+<td>Estoque</td>
+</tr>
+<tr>
+<td>infinity</td>
+<td></td>
+<td>*</td>
+<td>Boolean</td>
+<td>1</td>
+<td>Indica se o estoque é infinito default = false</td>
+</tr>
+</tbody></table>
+
+<h2 id="cria-o">Criação</h2>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<aside class="request">
+    <span class="method post">POST</span><span class="endpoint">/{ENVIRONMENT}/api/v2/logistics/stocks/skus/</span>
+</aside>
+<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://api.convertize.com.br/{ENVIRONMENT}/api/v2/logistics/stocks/skus/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+  <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Token </span><span class="si">%</span><span class="s">s'</span> <span class="o">%</span> <span class="n">API_KEY</span><span class="p">,</span>
+<span class="p">},</span> <span class="n">data</span><span class="o">=</span><span class="p">{</span>
+    <span class="s">"stock"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s">"sku"</span><span class="p">:</span> <span class="mi">1676</span><span class="p">,</span>
+    <span class="s">"quantity"</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="s">"infinity"</span><span class="p">:</span> <span class="n">false</span>
+<span class="p">})</span>
+
+<span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span>
+<span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</code></pre>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/v2/logistics/stocks/skus/"</span>
+  -H <span class="s2">"Authorization: Token API_KEY"</span>
+  -H <span class="s2">"Content-Type: multipart/form-data"</span>
+  -X POST -d <span class="s1">'&lt;JSON&gt;'</span>
+</code></pre>
+
+<blockquote>
+<p>O comando acima retonar um JSON conforme estrutura abaixo:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"stock"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="mi">1676</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"infinity"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h3 id="descri-o-dos-campos">Descrição dos campos</h3>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Requerido</th>
+<th>Unico</th>
+<th>Tipo do Campo</th>
+<th>Max Caracteres</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td></td>
+<td>*</td>
+<td>Int4</td>
+<td>-</td>
+<td>ID do Stock</td>
+</tr>
+<tr>
+<td>sku</td>
+<td></td>
+<td>*</td>
+<td>Int4</td>
+<td>-</td>
+<td>ID do SKU</td>
+</tr>
+<tr>
+<td>quantity</td>
+<td></td>
+<td>*</td>
+<td>Int4</td>
+<td>-</td>
+<td>Estoque</td>
+</tr>
+<tr>
+<td>infinity</td>
+<td></td>
+<td>*</td>
+<td>Boolean</td>
+<td>1</td>
+<td>Indica se o estoque é infinito default = false</td>
+</tr>
+</tbody></table>
+
+<h2 id="altera-o">Alteração</h2>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<aside class="request">
+    <span class="method put">PUT</span><span class="endpoint">/{ENVIRONMENT}/api/v2/logistics/stocks/skus/{ID}/</span>
+</aside>
+<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s">'https://api.convertize.com.br/{ENVIRONMENT}/api/v2/logistics/stocks/skus/&lt;ID&gt;/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+  <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Token </span><span class="si">%</span><span class="s">s'</span> <span class="o">%</span> <span class="n">API_KEY</span><span class="p">,</span>
+<span class="p">},</span> <span class="n">data</span><span class="o">=</span><span class="p">{</span>
+    <span class="s">"stock"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s">"sku"</span><span class="p">:</span> <span class="mi">1676</span><span class="p">,</span>
+    <span class="s">"quantity"</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="s">"infinity"</span><span class="p">:</span> <span class="n">false</span>
+<span class="p">})</span>
+
+<span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span>
+<span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</code></pre>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/v2/logistics/stocks/skus/&lt;ID&gt;/"</span>
+  -H <span class="s2">"Authorization: Token API_KEY"</span>
+  -H <span class="s2">"Content-Type: multipart/form-data"</span>
+  -X PUT -d <span class="s1">'&lt;JSON&gt;'</span>
+</code></pre>
+
+<blockquote>
+<p>O comando acima retonar um JSON conforme estrutura abaixo:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"stock"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="mi">1676</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"infinity"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h3 id="url-parameters">URL Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ID</td>
+<td>ID relativo ao Estoque</td>
+</tr>
+</tbody></table>
+
+<h3 id="descri-o-dos-campos">Descrição dos campos</h3>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Requerido</th>
+<th>Unico</th>
+<th>Tipo do Campo</th>
+<th>Max Caracteres</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td></td>
+<td>*</td>
+<td>Int4</td>
+<td>-</td>
+<td>ID do Stock</td>
+</tr>
+<tr>
+<td>sku</td>
+<td></td>
+<td>*</td>
+<td>Int4</td>
+<td>-</td>
+<td>ID do SKU</td>
+</tr>
+<tr>
+<td>quantity</td>
+<td></td>
+<td>*</td>
+<td>Int4</td>
+<td>-</td>
+<td>Estoque</td>
+</tr>
+<tr>
+<td>infinity</td>
+<td></td>
+<td>*</td>
+<td>Boolean</td>
+<td>1</td>
+<td>Indica se o estoque é infinito default = false</td>
+</tr>
+</tbody></table>
+
+<h2 id="delete">Delete</h2>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<aside class="request">
+    <span class="method delete">DELETE</span><span class="endpoint">/{ENVIRONMENT}/api/v2/logistics/stocks/skus/{ID}/</span>
+</aside>
+<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s">'https://api.convertize.com.br/{ENVIRONMENT}/api/v2/logistics/stocks/skus/{ID}/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+  <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Token </span><span class="si">%</span><span class="s">s'</span> <span class="o">%</span> <span class="n">API_KEY</span><span class="p">,</span>
+<span class="p">})</span>
+
+<span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span>
+<span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</code></pre>
+<pre class="highlight shell"><code>curl -X DELETE <span class="se">\</span>
+  https://api.convertize.com.br/<span class="o">{</span>ENVIRONMENT<span class="o">}</span>/api/v2/logistics/stocks/skus/<span class="o">{</span>ID<span class="o">}</span>/ <span class="se">\</span>
+  -H <span class="s1">'Authorization: Token API_KEY'</span>
+</code></pre>
+
+<blockquote>
+<p>O comando acima retonar um HTTP STATUS:</p>
+</blockquote>
+<pre class="highlight plaintext"><code>Http Status: 204
+</code></pre>
+
+<h3 id="url-parameters">URL Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ID</td>
+<td>ID relativo ao Estoque</td>
+</tr>
+</tbody></table>
+
+          <h1 id="precifica-o-tabela">Precificação - Tabela</h1>
+
+<h2 id="lista">Lista</h2>
+<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://api.convertize.com.br/{ENVIRONMENT}/v2/pricing/prices/skus/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+  <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Token </span><span class="si">%</span><span class="s">s'</span> <span class="o">%</span> <span class="n">API_KEY</span>
+<span class="p">})</span>
+
+<span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span>
+<span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</code></pre>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/v2/pricing/prices/skus/"</span>
+  -H <span class="s2">"Authorization: Token API_KEY"</span>
+</code></pre>
+
+<blockquote>
+<p>O comando acima retonar um JSON conforme estrutura abaixo:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">62</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"next"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"previous"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"results"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">64</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"table"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="mi">1696</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"percent"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"field_discount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unit_price"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">63</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"table"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="mi">1695</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"percent"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"field_discount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unit_price"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">40</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"table"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="mi">1694</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"percent"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"field_discount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unit_price"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">61</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"table"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="mi">1693</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"percent"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"field_discount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unit_price"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">60</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"table"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="mi">1692</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"percent"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"field_discount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unit_price"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">59</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"table"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="mi">1691</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"percent"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"field_discount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unit_price"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">58</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"table"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="mi">1687</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"percent"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"field_discount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unit_price"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">57</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"table"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="mi">1686</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"percent"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"field_discount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unit_price"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">56</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"table"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="mi">1685</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"percent"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"field_discount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unit_price"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">55</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"table"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="mi">1684</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"percent"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"field_discount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unit_price"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">54</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"table"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="mi">1683</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"percent"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"field_discount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unit_price"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">49</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"table"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="mi">1682</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"percent"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"field_discount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unit_price"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">48</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"table"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="mi">1681</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"percent"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"field_discount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unit_price"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">47</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"table"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="mi">1680</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"percent"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"field_discount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unit_price"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">46</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"table"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="mi">1679</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"percent"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"field_discount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unit_price"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">51</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"table"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="mi">1678</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"percent"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"field_discount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unit_price"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"table"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="mi">1677</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"percent"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"field_discount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unit_price"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">38</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"table"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="mi">1676</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"percent"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"field_discount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unit_price"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">37</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"table"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="mi">1675</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"percent"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"field_discount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unit_price"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">36</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"table"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="mi">1674</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"percent"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"field_discount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unit_price"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">35</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"table"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="mi">1673</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"percent"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"field_discount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unit_price"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">34</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"table"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="mi">1672</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"percent"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"field_discount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unit_price"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">33</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"table"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="mi">1671</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"percent"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"field_discount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unit_price"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">32</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"table"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="mi">1670</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"percent"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"field_discount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unit_price"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">31</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"table"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="mi">1669</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"percent"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"field_discount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unit_price"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"table"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="mi">1668</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"percent"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"field_discount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unit_price"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">29</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"table"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="mi">1667</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"percent"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"field_discount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unit_price"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">21</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"table"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="mi">1645</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"percent"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"field_discount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unit_price"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">22</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"table"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="mi">1644</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"percent"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"field_discount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unit_price"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">23</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"table"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="mi">1643</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"percent"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"field_discount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unit_price"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">27</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"table"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="mi">1642</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"percent"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"field_discount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unit_price"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">26</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"table"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="mi">1641</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"percent"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"field_discount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unit_price"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">25</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"table"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="mi">1640</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"percent"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"field_discount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unit_price"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">24</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"table"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="mi">1639</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"percent"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"field_discount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unit_price"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">17</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"table"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="mi">1377</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"percent"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"field_discount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unit_price"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"table"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="mi">106</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"percent"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"field_discount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unit_price"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"table"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="mi">32</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"percent"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"field_discount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unit_price"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"table"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="mi">31</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"percent"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"field_discount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unit_price"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"table"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="mi">29</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"percent"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"field_discount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unit_price"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"table"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="mi">28</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"percent"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"field_discount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unit_price"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"table"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="mi">27</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"percent"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"field_discount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unit_price"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"table"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="mi">26</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"percent"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"field_discount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unit_price"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"table"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="mi">22</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"percent"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"field_discount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unit_price"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"table"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="mi">21</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"percent"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"field_discount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unit_price"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"table"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"percent"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"field_discount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unit_price"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10.00000"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">16</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"table"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="mi">19</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"percent"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"field_discount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unit_price"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">18</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"table"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="mi">18</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"percent"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"field_discount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unit_price"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">39</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"table"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="mi">16</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"percent"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"field_discount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unit_price"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">28</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"table"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"percent"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"field_discount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unit_price"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">14</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"table"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="mi">14</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"percent"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"field_discount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unit_price"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"table"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"percent"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"field_discount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unit_price"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"table"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"percent"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"field_discount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unit_price"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">45</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"table"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"percent"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"field_discount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unit_price"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">43</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"table"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"percent"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"field_discount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unit_price"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"table"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"percent"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"field_discount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unit_price"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">41</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"table"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"percent"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"field_discount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unit_price"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">44</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"table"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"percent"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"field_discount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unit_price"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">62</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"table"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"percent"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"field_discount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unit_price"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">53</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"table"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"percent"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"field_discount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unit_price"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">52</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"table"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"percent"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"field_discount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unit_price"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">19</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"table"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"nominal"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"field_discount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unit_price"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"750.00000"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"table"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"percent"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"field_discount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sale_price"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"50.00000"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<aside class="request">
+    <span class="method get">GET</span><span class="endpoint">/{ENVIRONMENT}/api/v2/pricing/prices/skus/</span>
+</aside>
+
+<h3 id="filtros-via-query-parameters">Filtros via Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>Filtro pelo ID</td>
+</tr>
+<tr>
+<td>table</td>
+<td>Filtro pelo ID da tabela</td>
+</tr>
+<tr>
+<td>sku</td>
+<td>Filtro pelo ID do SKU</td>
+</tr>
+<tr>
+<td>sku__in</td>
+<td>Filtro pela lista de ID do SKU separados por ,</td>
+</tr>
+</tbody></table>
+
+<h3 id="descri-o-dos-campos">Descrição dos campos</h3>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Requerido</th>
+<th>Unico</th>
+<th>Tipo do Campo</th>
+<th>Max Caracteres</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td></td>
+<td>*</td>
+<td>Int4</td>
+<td>-</td>
+<td>ID do preço</td>
+</tr>
+<tr>
+<td>table</td>
+<td></td>
+<td>*</td>
+<td>Int4</td>
+<td>-</td>
+<td>ID da Tabela</td>
+</tr>
+<tr>
+<td>sku</td>
+<td></td>
+<td>*</td>
+<td>Int4</td>
+<td>-</td>
+<td>ID do SKU</td>
+</tr>
+<tr>
+<td>value_type</td>
+<td></td>
+<td>*</td>
+<td>Varchar</td>
+<td>-</td>
+<td>Tipo do valor (percent, nominal)</td>
+</tr>
+<tr>
+<td>field_discount</td>
+<td></td>
+<td>*</td>
+<td>Varchar</td>
+<td>-</td>
+<td>Campo usado para calculo do desconto (cost_price, unit_price, sale_price)</td>
+</tr>
+<tr>
+<td>value</td>
+<td></td>
+<td>*</td>
+<td>Double</td>
+<td>10,4</td>
+<td>Valor do desconto</td>
+</tr>
+</tbody></table>
+
+<h2 id="detalhes">Detalhes</h2>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<aside class="request">
+    <span class="method get">GET</span><span class="endpoint">/{ENVIRONMENT}/api/v2/pricing/prices/skus/{ID}/</span>
+</aside>
+<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://api.convertize.com.br/{ENVIRONMENT}/api/v2/pricing/prices/skus/&lt;ID&gt;/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+  <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Token </span><span class="si">%</span><span class="s">s'</span> <span class="o">%</span> <span class="n">API_KEY</span>
+<span class="p">})</span>
+
+<span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span>
+<span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</code></pre>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/v2/pricing/prices/skus/&lt;ID&gt;/"</span>
+  -H <span class="s2">"Authorization: Token API_KEY"</span>
+</code></pre>
+
+<blockquote>
+<p>O comando acima retonar um JSON conforme estrutura abaixo:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">64</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"table"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="mi">1696</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"value_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"percent"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"field_discount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unit_price"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h3 id="url-parameters">URL Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ID</td>
+<td>ID relativo ao preço</td>
+</tr>
+</tbody></table>
+
+<h3 id="descri-o-dos-campos">Descrição dos campos</h3>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Requerido</th>
+<th>Unico</th>
+<th>Tipo do Campo</th>
+<th>Max Caracteres</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td></td>
+<td>*</td>
+<td>Int4</td>
+<td>-</td>
+<td>ID do preço</td>
+</tr>
+<tr>
+<td>table</td>
+<td></td>
+<td>*</td>
+<td>Int4</td>
+<td>-</td>
+<td>ID da Tabela</td>
+</tr>
+<tr>
+<td>sku</td>
+<td></td>
+<td>*</td>
+<td>Int4</td>
+<td>-</td>
+<td>ID do SKU</td>
+</tr>
+<tr>
+<td>value_type</td>
+<td></td>
+<td>*</td>
+<td>Varchar</td>
+<td>-</td>
+<td>Tipo do valor (percent, nominal)</td>
+</tr>
+<tr>
+<td>field_discount</td>
+<td></td>
+<td>*</td>
+<td>Varchar</td>
+<td>-</td>
+<td>Campo usado para calculo do desconto (cost_price, unit_price, sale_price)</td>
+</tr>
+<tr>
+<td>value</td>
+<td></td>
+<td>*</td>
+<td>Double</td>
+<td>10,4</td>
+<td>Valor do desconto</td>
+</tr>
+</tbody></table>
+
+<h2 id="cria-o">Criação</h2>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<aside class="request">
+    <span class="method post">POST</span><span class="endpoint">/{ENVIRONMENT}/api/v2/pricing/prices/skus/</span>
+</aside>
+<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://api.convertize.com.br/{ENVIRONMENT}/api/v2/pricing/prices/skus/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+  <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Token </span><span class="si">%</span><span class="s">s'</span> <span class="o">%</span> <span class="n">API_KEY</span><span class="p">,</span>
+<span class="p">},</span> <span class="n">data</span><span class="o">=</span><span class="p">{</span>
+    <span class="s">"table"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s">"sku"</span><span class="p">:</span> <span class="mi">1696</span><span class="p">,</span>
+    <span class="s">"value_type"</span><span class="p">:</span> <span class="s">"percent"</span><span class="p">,</span>
+    <span class="s">"field_discount"</span><span class="p">:</span> <span class="s">"unit_price"</span><span class="p">,</span>
+    <span class="s">"value"</span><span class="p">:</span> <span class="s">"0.00000"</span>
+<span class="p">})</span>
+
+<span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span>
+<span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</code></pre>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/v2/pricing/prices/skus/"</span>
+  -H <span class="s2">"Authorization: Token API_KEY"</span>
+  -H <span class="s2">"Content-Type: multipart/form-data"</span>
+  -X POST -d <span class="s1">'&lt;JSON&gt;'</span>
+</code></pre>
+
+<blockquote>
+<p>O comando acima retonar um JSON conforme estrutura abaixo:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">64</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"table"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="mi">1696</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"value_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"percent"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"field_discount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unit_price"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h3 id="descri-o-dos-campos">Descrição dos campos</h3>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Requerido</th>
+<th>Unico</th>
+<th>Tipo do Campo</th>
+<th>Max Caracteres</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td></td>
+<td>*</td>
+<td>Int4</td>
+<td>-</td>
+<td>ID do preço</td>
+</tr>
+<tr>
+<td>table</td>
+<td></td>
+<td>*</td>
+<td>Int4</td>
+<td>-</td>
+<td>ID da Tabela</td>
+</tr>
+<tr>
+<td>sku</td>
+<td></td>
+<td>*</td>
+<td>Int4</td>
+<td>-</td>
+<td>ID do SKU</td>
+</tr>
+<tr>
+<td>value_type</td>
+<td></td>
+<td>*</td>
+<td>Varchar</td>
+<td>-</td>
+<td>Tipo do valor (percent, nominal)</td>
+</tr>
+<tr>
+<td>field_discount</td>
+<td></td>
+<td>*</td>
+<td>Varchar</td>
+<td>-</td>
+<td>Campo usado para calculo do desconto (cost_price, unit_price, sale_price)</td>
+</tr>
+<tr>
+<td>value</td>
+<td></td>
+<td>*</td>
+<td>Double</td>
+<td>10,4</td>
+<td>Valor do desconto</td>
+</tr>
+</tbody></table>
+
+<h2 id="altera-o">Alteração</h2>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<aside class="request">
+    <span class="method put">PUT</span><span class="endpoint">/{ENVIRONMENT}/api/v2/pricing/prices/skus/{ID}/</span>
+</aside>
+<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s">'https://api.convertize.com.br/{ENVIRONMENT}/api/v2/pricing/prices/skus/&lt;ID&gt;/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+  <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Token </span><span class="si">%</span><span class="s">s'</span> <span class="o">%</span> <span class="n">API_KEY</span><span class="p">,</span>
+<span class="p">},</span> <span class="n">data</span><span class="o">=</span><span class="p">{</span>
+    <span class="s">"table"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s">"sku"</span><span class="p">:</span> <span class="mi">1696</span><span class="p">,</span>
+    <span class="s">"value_type"</span><span class="p">:</span> <span class="s">"percent"</span><span class="p">,</span>
+    <span class="s">"field_discount"</span><span class="p">:</span> <span class="s">"unit_price"</span><span class="p">,</span>
+    <span class="s">"value"</span><span class="p">:</span> <span class="s">"0.00000"</span>
+<span class="p">})</span>
+
+<span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span>
+<span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</code></pre>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/v2/pricing/prices/skus/&lt;ID&gt;/"</span>
+  -H <span class="s2">"Authorization: Token API_KEY"</span>
+  -H <span class="s2">"Content-Type: multipart/form-data"</span>
+  -X PUT -d <span class="s1">'&lt;JSON&gt;'</span>
+</code></pre>
+
+<blockquote>
+<p>O comando acima retonar um JSON conforme estrutura abaixo:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">64</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"table"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="mi">1696</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"value_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"percent"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"field_discount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unit_price"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h3 id="url-parameters">URL Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ID</td>
+<td>ID relativo ao preço</td>
+</tr>
+</tbody></table>
+
+<h3 id="descri-o-dos-campos">Descrição dos campos</h3>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Requerido</th>
+<th>Unico</th>
+<th>Tipo do Campo</th>
+<th>Max Caracteres</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td></td>
+<td>*</td>
+<td>Int4</td>
+<td>-</td>
+<td>ID do preço</td>
+</tr>
+<tr>
+<td>table</td>
+<td></td>
+<td>*</td>
+<td>Int4</td>
+<td>-</td>
+<td>ID da Tabela</td>
+</tr>
+<tr>
+<td>sku</td>
+<td></td>
+<td>*</td>
+<td>Int4</td>
+<td>-</td>
+<td>ID do SKU</td>
+</tr>
+<tr>
+<td>value_type</td>
+<td></td>
+<td>*</td>
+<td>Varchar</td>
+<td>-</td>
+<td>Tipo do valor (percent, nominal)</td>
+</tr>
+<tr>
+<td>field_discount</td>
+<td></td>
+<td>*</td>
+<td>Varchar</td>
+<td>-</td>
+<td>Campo usado para calculo do desconto (cost_price, unit_price, sale_price)</td>
+</tr>
+<tr>
+<td>value</td>
+<td></td>
+<td>*</td>
+<td>Double</td>
+<td>10,4</td>
+<td>Valor do desconto</td>
+</tr>
+</tbody></table>
+
+<h2 id="delete">Delete</h2>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<aside class="request">
+    <span class="method delete">DELETE</span><span class="endpoint">/{ENVIRONMENT}/api/v2/pricing/prices/skus/{ID}/</span>
+</aside>
+<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s">'https://api.convertize.com.br/{ENVIRONMENT}/api/v2/pricing/prices/skus/{ID}/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+  <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Token </span><span class="si">%</span><span class="s">s'</span> <span class="o">%</span> <span class="n">API_KEY</span><span class="p">,</span>
+<span class="p">})</span>
+
+<span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span>
+<span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</code></pre>
+<pre class="highlight shell"><code>curl -X DELETE <span class="se">\</span>
+  https://api.convertize.com.br/<span class="o">{</span>ENVIRONMENT<span class="o">}</span>/api/v2/pricing/prices/skus/<span class="o">{</span>ID<span class="o">}</span>/ <span class="se">\</span>
+  -H <span class="s1">'Authorization: Token API_KEY'</span>
+</code></pre>
+
+<blockquote>
+<p>O comando acima retonar um HTTP STATUS:</p>
+</blockquote>
+<pre class="highlight plaintext"><code>Http Status: 204
+</code></pre>
+
+<h3 id="url-parameters">URL Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ID</td>
+<td>ID relativo ao preço</td>
+</tr>
+</tbody></table>
+
       </div>
       <div class="dark-box">
           <div class="lang-selector">
