@@ -928,7 +928,7 @@ Você deve substituir <code>API_KEY</code> pela sua chave de acesso.
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span>
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 </code></pre>
-<pre class="highlight shell"><code>curl <span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/1.0/categories/"</span>
   -H <span class="s2">"Authorization: Token API_KEY"</span>
 </code></pre>
 <pre class="highlight csharp"><code><span class="k">using</span> <span class="nn">RestSharp</span><span class="p">;</span>
@@ -9738,6 +9738,2186 @@ product=2020562
 <tr>
 <td>ID</td>
 <td>ID relativo ao preço</td>
+</tr>
+</tbody></table>
+
+          <h1 id="lista-de-presente">Lista de Presente</h1>
+
+<h2 id="lista">Lista</h2>
+
+<h3 id="lista-de-listas-de-presente">Lista de Listas de Presente</h3>
+<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://api.convertize.com.br/{ENVIRONMENT}/api/v2/giftlists/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+  <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Token </span><span class="si">%</span><span class="s">s'</span> <span class="o">%</span> <span class="n">API_KEY</span>
+<span class="p">})</span>
+
+<span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span>
+<span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</code></pre>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/v2/giftlists/"</span>
+  -H <span class="s2">"Authorization: Token API_KEY"</span>
+</code></pre>
+<pre class="highlight csharp"><code><span class="k">using</span> <span class="nn">RestSharp</span><span class="p">;</span>
+<span class="n">var</span> <span class="n">client</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">RestClient</span><span class="p">(</span><span class="s">"https://api.convertize.com.br/{ENVIRONMENT}/api/v2/"</span><span class="p">);</span>
+
+<span class="n">var</span> <span class="n">request</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">RestRequest</span><span class="p">(</span><span class="s">"/giftlists/"</span><span class="p">);</span>
+<span class="n">request</span><span class="p">.</span><span class="n">Method</span> <span class="p">=</span> <span class="n">Method</span><span class="p">.</span><span class="n">GET</span><span class="p">;</span>
+<span class="n">request</span><span class="p">.</span><span class="nf">AddHeader</span><span class="p">(</span><span class="s">"Authorization"</span><span class="p">,</span> <span class="s">"Token "</span> <span class="p">+</span> <span class="n">API_KEY</span><span class="p">);</span>
+
+<span class="n">var</span> <span class="n">response</span> <span class="p">=</span> <span class="n">client</span><span class="p">.</span><span class="nf">Execute</span><span class="p">(</span><span class="n">request</span><span class="p">);</span>
+</code></pre>
+
+<blockquote>
+<p>O comando acima retonar um JSON conforme estrutura abaixo:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">188</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"next"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/v2/giftlists/?page=2"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"previous"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"results"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">24</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"reference_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/lista/presente/isabella-magalhaes-e-murillo-augusto-moreira-bonamini/24/"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"type_list"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"customer"</span><span class="p">:</span><span class="w"> </span><span class="mi">72</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-12-29"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"guests"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"collection"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"notification"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"publish"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"ceremony_zipcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"ceremony_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"ceremony_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"ceremony_neighborhood"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"ceremony_complement"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"ceremony_city"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"ceremony_state"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"reception_zipcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"reception_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"reception_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"reception_neighborhood"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"reception_complement"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"reception_city"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"reception_state"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Isabella Magalhães"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"isahiroshima1999@gmail.com"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"mother_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Andreia Magalhães"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"father_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sidney Cortiglio"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"partner_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Murillo Augusto Moreira Bonamini"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"partner_email"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"partner_mother_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Andrea Bonamini"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"partner_father_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Gilberto Bonamini"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"shipping_zipcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"37580-000"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"shipping_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rua Bahia"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"shipping_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"261"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"shipping_neighborhood"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Magioli"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"shipping_complement"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Loja"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"shipping_city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MONTE SIÃO"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"shipping_state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MG"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"shipping_date"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"shipping_description"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"add_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-07-02T17:05:26.448387"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"change_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-07-02T17:21:02.975380"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"user"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"giftcard"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"gift_items"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">23</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"reference_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/lista/presente/leonardo-moreira-e-jessica-lopes-de-lima/23/"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"type_list"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"customer"</span><span class="p">:</span><span class="w"> </span><span class="mi">69</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-07-25"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"guests"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"collection"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"notification"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"publish"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"E"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"ceremony_zipcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"ceremony_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"ceremony_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"ceremony_neighborhood"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"ceremony_complement"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"ceremony_city"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"ceremony_state"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"reception_zipcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"reception_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"reception_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"reception_neighborhood"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"reception_complement"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"reception_city"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"reception_state"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Leonardo Moreira"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"leomoreiraa.94@gmail.com"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"mother_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Benedita Ap. Pinto"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"father_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Leonel Moreira"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"partner_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jéssica Lopes de Lima"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"partner_email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"jessicahlima431@gmail.com"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"partner_mother_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tatiane Marques Lopes"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"partner_father_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"José Edilson de Lima"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"shipping_zipcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"18460-000"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"shipping_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rua Lauro Novaes Ribas"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"shipping_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"23"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"shipping_neighborhood"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tonico Adolfo"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"shipping_complement"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Casa"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"shipping_city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ITARARÉ"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"shipping_state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SP"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"shipping_date"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"shipping_description"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"add_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-06-22T03:46:40.451939"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"change_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-06-25T13:12:38.486048"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"user"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"giftcard"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"gift_items"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<aside class="request">
+    <span class="method get">GET</span><span class="endpoint">/{ENVIRONMENT}/api/v2/giftlists/</span>
+</aside>
+
+<h3 id="filtros-via-query-parameters">Filtros via Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>ID da Lista</td>
+</tr>
+<tr>
+<td>reference_code</td>
+<td>Código de referência</td>
+</tr>
+<tr>
+<td>type_list</td>
+<td>Tipo de lista</td>
+</tr>
+</tbody></table>
+
+<h3 id="descri-o-dos-campos">Descrição dos campos</h3>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Requerido</th>
+<th>Unico</th>
+<th>Tipo do Campo</th>
+<th>Max Caracteres</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td></td>
+<td>*</td>
+<td>Int4</td>
+<td>-</td>
+<td>ID da lista</td>
+</tr>
+<tr>
+<td>reference_code</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>64</td>
+<td>Código de referência</td>
+</tr>
+<tr>
+<td>url</td>
+<td></td>
+<td>*</td>
+<td>Text</td>
+<td>-</td>
+<td>URL da Lista de Presente (On-Line) gerado automaticamente</td>
+</tr>
+<tr>
+<td>type_list</td>
+<td></td>
+<td></td>
+<td>Int4</td>
+<td>-</td>
+<td>ID do Tipo da Lista</td>
+</tr>
+<tr>
+<td>customer</td>
+<td></td>
+<td></td>
+<td>Int4</td>
+<td>-</td>
+<td>ID do Cliente</td>
+</tr>
+<tr>
+<td>date</td>
+<td></td>
+<td></td>
+<td>Date</td>
+<td>-</td>
+<td>Data do Evento</td>
+</tr>
+<tr>
+<td>state</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>2</td>
+<td>Estado do Evento</td>
+</tr>
+<tr>
+<td>guests</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>2</td>
+<td>Número de Convidados</td>
+</tr>
+<tr>
+<td>message</td>
+<td></td>
+<td></td>
+<td>Text</td>
+<td></td>
+<td>Mensagem para os convidados que acessarem a sua lista</td>
+</tr>
+<tr>
+<td>collection</td>
+<td></td>
+<td></td>
+<td>Int4</td>
+<td>-</td>
+<td>ID da coleção, usado para lista pronta</td>
+</tr>
+<tr>
+<td>notification</td>
+<td></td>
+<td></td>
+<td>Boolean</td>
+<td>1</td>
+<td>Deseja receber informações sobre minha lista por e-mail</td>
+</tr>
+<tr>
+<td>publish</td>
+<td></td>
+<td></td>
+<td>Boolean</td>
+<td>1</td>
+<td>Deixar minha lista disponível no site</td>
+</tr>
+<tr>
+<td>status</td>
+<td>*</td>
+<td></td>
+<td>Varchar</td>
+<td>2</td>
+<td>Status da lista (A = Ativa, F = Finalizada, I = Inativa, E = Excluída), default = A</td>
+</tr>
+<tr>
+<td>ceremony_zipcode</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>9</td>
+<td>CEP do Local da Cerimônia</td>
+</tr>
+<tr>
+<td>ceremony_address</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>150</td>
+<td>Endereço do Local da Cerimônia</td>
+</tr>
+<tr>
+<td>ceremony_number</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>8</td>
+<td>Número do Local da Cerimônia</td>
+</tr>
+<tr>
+<td>ceremony_neighborhood</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>120</td>
+<td>Bairro do Local da Cerimônia</td>
+</tr>
+<tr>
+<td>ceremony_complement</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>255</td>
+<td>Complemento do Local da Cerimônia</td>
+</tr>
+<tr>
+<td>ceremony_city</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>150</td>
+<td>Cidade do Local da Cerimônia</td>
+</tr>
+<tr>
+<td>ceremony_state</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>2</td>
+<td>Estado do Local da Cerimônia</td>
+</tr>
+<tr>
+<td>reception_zipcode</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>9</td>
+<td>CEP do Local da Festa</td>
+</tr>
+<tr>
+<td>reception_address</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>150</td>
+<td>Endereço do Local da Festa</td>
+</tr>
+<tr>
+<td>reception_number</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>8</td>
+<td>Número do Local da Festa</td>
+</tr>
+<tr>
+<td>reception_neighborhood</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>120</td>
+<td>Bairro do Local da Festa</td>
+</tr>
+<tr>
+<td>reception_complement</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>60</td>
+<td>Complemento do Local da Festa</td>
+</tr>
+<tr>
+<td>reception_city</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>150</td>
+<td>Cidade do Local da Festa</td>
+</tr>
+<tr>
+<td>reception_state</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>2</td>
+<td>Estado do Local da Festa</td>
+</tr>
+<tr>
+<td>name</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>255</td>
+<td>Nome do dono da Lista</td>
+</tr>
+<tr>
+<td>email</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>255</td>
+<td>E-mail do dono da Lista</td>
+</tr>
+<tr>
+<td>mother_name</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>255</td>
+<td>Nome da mãe do dono da Lista</td>
+</tr>
+<tr>
+<td>father_name</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>255</td>
+<td>Nome do pai do dono da Lista</td>
+</tr>
+<tr>
+<td>partner_name</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>255</td>
+<td>Nome do parceiro da Lista</td>
+</tr>
+<tr>
+<td>partner_email</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>255</td>
+<td>E-mail do parceiro da Lista</td>
+</tr>
+<tr>
+<td>partner_mother_name</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>255</td>
+<td>Nome da mãe do parceiro da Lista</td>
+</tr>
+<tr>
+<td>partner_father_name</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>255</td>
+<td>Nome do pai do parceiro da Lista</td>
+</tr>
+<tr>
+<td>shipping_zipcode</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>9</td>
+<td>CEP de Entrega</td>
+</tr>
+<tr>
+<td>shipping_address</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>150</td>
+<td>Endereço de Entrega</td>
+</tr>
+<tr>
+<td>shipping_number</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>8</td>
+<td>Número de Entrega</td>
+</tr>
+<tr>
+<td>shipping_neighborhood</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>120</td>
+<td>Bairro de Entrega</td>
+</tr>
+<tr>
+<td>shipping_complement</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>60</td>
+<td>Complemento de Entrega</td>
+</tr>
+<tr>
+<td>shipping_city</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>150</td>
+<td>Cidade de Entrega</td>
+</tr>
+<tr>
+<td>shipping_state</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>2</td>
+<td>Estado de Entrega</td>
+</tr>
+<tr>
+<td>shipping_date</td>
+<td></td>
+<td></td>
+<td>Date</td>
+<td>-</td>
+<td>Data de entrega</td>
+</tr>
+<tr>
+<td>shipping_description</td>
+<td></td>
+<td></td>
+<td>Text</td>
+<td></td>
+<td>Observação da entrega</td>
+</tr>
+<tr>
+<td>add_date</td>
+<td></td>
+<td></td>
+<td>Date</td>
+<td>-</td>
+<td>Data de criação</td>
+</tr>
+<tr>
+<td>change_date</td>
+<td></td>
+<td></td>
+<td>Date</td>
+<td>-</td>
+<td>Data de alteração</td>
+</tr>
+<tr>
+<td>user</td>
+<td></td>
+<td></td>
+<td>Int4</td>
+<td>-</td>
+<td>ID do usuario, quando criado pela administração</td>
+</tr>
+<tr>
+<td>giftcard</td>
+<td></td>
+<td></td>
+<td>Int4</td>
+<td>-</td>
+<td>Dados do GiftCard, quando o pedido é entregue por vale. Gerado automaticamente</td>
+</tr>
+</tbody></table>
+
+<h2 id="detalhes">Detalhes</h2>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<aside class="request">
+    <span class="method get">GET</span><span class="endpoint">/{ENVIRONMENT}/api/v2/giftlists/{ID}/</span>
+</aside>
+<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://api.convertize.com.br/{ENVIRONMENT}/api/v2/giftlists/{ID}/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+  <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Token </span><span class="si">%</span><span class="s">s'</span> <span class="o">%</span> <span class="n">API_KEY</span>
+<span class="p">})</span>
+
+<span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span>
+<span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</code></pre>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/v2/giftlists/{ID}/"</span>
+  -H <span class="s2">"Authorization: Token API_KEY"</span>
+</code></pre>
+<pre class="highlight csharp"><code><span class="k">using</span> <span class="nn">RestSharp</span><span class="p">;</span>
+<span class="n">var</span> <span class="n">client</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">RestClient</span><span class="p">(</span><span class="s">"https://api.convertize.com.br/{ENVIRONMENT}/api/v2/"</span><span class="p">);</span>
+
+<span class="n">var</span> <span class="n">request</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">RestRequest</span><span class="p">(</span><span class="s">"/giftlists/{ID}/"</span><span class="p">);</span>
+<span class="n">request</span><span class="p">.</span><span class="n">Method</span> <span class="p">=</span> <span class="n">Method</span><span class="p">.</span><span class="n">GET</span><span class="p">;</span>
+<span class="n">request</span><span class="p">.</span><span class="nf">AddHeader</span><span class="p">(</span><span class="s">"Authorization"</span><span class="p">,</span> <span class="s">"Token "</span> <span class="p">+</span> <span class="n">API_KEY</span><span class="p">);</span>
+
+<span class="n">var</span> <span class="n">response</span> <span class="p">=</span> <span class="n">client</span><span class="p">.</span><span class="nf">Execute</span><span class="p">(</span><span class="n">request</span><span class="p">);</span>
+</code></pre>
+
+<blockquote>
+<p>O comando acima retonar um JSON conforme estrutura abaixo:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">24</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"reference_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/lista/presente/isabella-magalhaes-e-murillo-augusto-moreira-bonamini/24/"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"type_list"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"customer"</span><span class="p">:</span><span class="w"> </span><span class="mi">72</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-12-29"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"guests"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"collection"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"notification"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"publish"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"ceremony_zipcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"ceremony_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"ceremony_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"ceremony_neighborhood"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"ceremony_complement"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"ceremony_city"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"ceremony_state"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"reception_zipcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"reception_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"reception_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"reception_neighborhood"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"reception_complement"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"reception_city"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"reception_state"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Isabella Magalhães"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"isahiroshima1999@gmail.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"mother_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Andreia Magalhães"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"father_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sidney Cortiglio"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"partner_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Murillo Augusto Moreira Bonamini"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"partner_email"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"partner_mother_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Andrea Bonamini"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"partner_father_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Gilberto Bonamini"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"shipping_zipcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"37580-000"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"shipping_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rua Bahia"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"shipping_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"261"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"shipping_neighborhood"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Magioli"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"shipping_complement"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Loja"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"shipping_city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MONTE SIÃO"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"shipping_state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MG"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"shipping_date"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"shipping_description"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"add_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-07-02T17:05:26.448387"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"change_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-07-02T17:21:02.975380"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"user"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"giftcard"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"gift_items"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h3 id="url-parameters">URL Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ID</td>
+<td>ID relativo a lista</td>
+</tr>
+</tbody></table>
+
+<h3 id="descri-o-dos-campos">Descrição dos campos</h3>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Requerido</th>
+<th>Unico</th>
+<th>Tipo do Campo</th>
+<th>Max Caracteres</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td></td>
+<td>*</td>
+<td>Int4</td>
+<td>-</td>
+<td>ID da lista</td>
+</tr>
+<tr>
+<td>reference_code</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>64</td>
+<td>Código de referência</td>
+</tr>
+<tr>
+<td>url</td>
+<td></td>
+<td>*</td>
+<td>Text</td>
+<td>-</td>
+<td>URL da Lista de Presente (On-Line) gerado automaticamente</td>
+</tr>
+<tr>
+<td>type_list</td>
+<td></td>
+<td></td>
+<td>Int4</td>
+<td>-</td>
+<td>ID do Tipo da Lista</td>
+</tr>
+<tr>
+<td>customer</td>
+<td></td>
+<td></td>
+<td>Int4</td>
+<td>-</td>
+<td>ID do Cliente</td>
+</tr>
+<tr>
+<td>date</td>
+<td></td>
+<td></td>
+<td>Date</td>
+<td>-</td>
+<td>Data do Evento</td>
+</tr>
+<tr>
+<td>state</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>2</td>
+<td>Estado do Evento</td>
+</tr>
+<tr>
+<td>guests</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>2</td>
+<td>Número de Convidados</td>
+</tr>
+<tr>
+<td>message</td>
+<td></td>
+<td></td>
+<td>Text</td>
+<td></td>
+<td>Mensagem para os convidados que acessarem a sua lista</td>
+</tr>
+<tr>
+<td>collection</td>
+<td></td>
+<td></td>
+<td>Int4</td>
+<td>-</td>
+<td>ID da coleção, usado para lista pronta</td>
+</tr>
+<tr>
+<td>notification</td>
+<td></td>
+<td></td>
+<td>Boolean</td>
+<td>1</td>
+<td>Deseja receber informações sobre minha lista por e-mail</td>
+</tr>
+<tr>
+<td>publish</td>
+<td></td>
+<td></td>
+<td>Boolean</td>
+<td>1</td>
+<td>Deixar minha lista disponível no site</td>
+</tr>
+<tr>
+<td>status</td>
+<td>*</td>
+<td></td>
+<td>Varchar</td>
+<td>2</td>
+<td>Status da lista (A = Ativa, F = Finalizada, I = Inativa, E = Excluída), default = A</td>
+</tr>
+<tr>
+<td>ceremony_zipcode</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>9</td>
+<td>CEP do Local da Cerimônia</td>
+</tr>
+<tr>
+<td>ceremony_address</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>150</td>
+<td>Endereço do Local da Cerimônia</td>
+</tr>
+<tr>
+<td>ceremony_number</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>8</td>
+<td>Número do Local da Cerimônia</td>
+</tr>
+<tr>
+<td>ceremony_neighborhood</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>120</td>
+<td>Bairro do Local da Cerimônia</td>
+</tr>
+<tr>
+<td>ceremony_complement</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>255</td>
+<td>Complemento do Local da Cerimônia</td>
+</tr>
+<tr>
+<td>ceremony_city</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>150</td>
+<td>Cidade do Local da Cerimônia</td>
+</tr>
+<tr>
+<td>ceremony_state</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>2</td>
+<td>Estado do Local da Cerimônia</td>
+</tr>
+<tr>
+<td>reception_zipcode</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>9</td>
+<td>CEP do Local da Festa</td>
+</tr>
+<tr>
+<td>reception_address</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>150</td>
+<td>Endereço do Local da Festa</td>
+</tr>
+<tr>
+<td>reception_number</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>8</td>
+<td>Número do Local da Festa</td>
+</tr>
+<tr>
+<td>reception_neighborhood</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>120</td>
+<td>Bairro do Local da Festa</td>
+</tr>
+<tr>
+<td>reception_complement</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>60</td>
+<td>Complemento do Local da Festa</td>
+</tr>
+<tr>
+<td>reception_city</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>150</td>
+<td>Cidade do Local da Festa</td>
+</tr>
+<tr>
+<td>reception_state</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>2</td>
+<td>Estado do Local da Festa</td>
+</tr>
+<tr>
+<td>name</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>255</td>
+<td>Nome do dono da Lista</td>
+</tr>
+<tr>
+<td>email</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>255</td>
+<td>E-mail do dono da Lista</td>
+</tr>
+<tr>
+<td>mother_name</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>255</td>
+<td>Nome da mãe do dono da Lista</td>
+</tr>
+<tr>
+<td>father_name</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>255</td>
+<td>Nome do pai do dono da Lista</td>
+</tr>
+<tr>
+<td>partner_name</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>255</td>
+<td>Nome do parceiro da Lista</td>
+</tr>
+<tr>
+<td>partner_email</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>255</td>
+<td>E-mail do parceiro da Lista</td>
+</tr>
+<tr>
+<td>partner_mother_name</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>255</td>
+<td>Nome da mãe do parceiro da Lista</td>
+</tr>
+<tr>
+<td>partner_father_name</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>255</td>
+<td>Nome do pai do parceiro da Lista</td>
+</tr>
+<tr>
+<td>shipping_zipcode</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>9</td>
+<td>CEP de Entrega</td>
+</tr>
+<tr>
+<td>shipping_address</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>150</td>
+<td>Endereço de Entrega</td>
+</tr>
+<tr>
+<td>shipping_number</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>8</td>
+<td>Número de Entrega</td>
+</tr>
+<tr>
+<td>shipping_neighborhood</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>120</td>
+<td>Bairro de Entrega</td>
+</tr>
+<tr>
+<td>shipping_complement</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>60</td>
+<td>Complemento de Entrega</td>
+</tr>
+<tr>
+<td>shipping_city</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>150</td>
+<td>Cidade de Entrega</td>
+</tr>
+<tr>
+<td>shipping_state</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>2</td>
+<td>Estado de Entrega</td>
+</tr>
+<tr>
+<td>shipping_date</td>
+<td></td>
+<td></td>
+<td>Date</td>
+<td>-</td>
+<td>Data de entrega</td>
+</tr>
+<tr>
+<td>shipping_description</td>
+<td></td>
+<td></td>
+<td>Text</td>
+<td></td>
+<td>Observação da entrega</td>
+</tr>
+<tr>
+<td>add_date</td>
+<td></td>
+<td></td>
+<td>Date</td>
+<td>-</td>
+<td>Data de criação</td>
+</tr>
+<tr>
+<td>change_date</td>
+<td></td>
+<td></td>
+<td>Date</td>
+<td>-</td>
+<td>Data de alteração</td>
+</tr>
+<tr>
+<td>user</td>
+<td></td>
+<td></td>
+<td>Int4</td>
+<td>-</td>
+<td>ID do usuario, quando criado pela administração</td>
+</tr>
+<tr>
+<td>giftcard</td>
+<td></td>
+<td></td>
+<td>Int4</td>
+<td>-</td>
+<td>Dados do GiftCard, quando o pedido é entregue por vale. Gerado automaticamente</td>
+</tr>
+</tbody></table>
+
+<h2 id="cria-o">Criação</h2>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<aside class="request">
+    <span class="method post">POST</span><span class="endpoint">/{ENVIRONMENT}/api/v2/giftlists/</span>
+</aside>
+<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://api.convertize.com.br/{ENVIRONMENT}/api/v2/giftlists/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+  <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Token </span><span class="si">%</span><span class="s">s'</span> <span class="o">%</span> <span class="n">API_KEY</span><span class="p">,</span>
+  <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/json'</span>
+<span class="p">},</span> <span class="n">data</span><span class="o">=&lt;</span><span class="n">JSON</span><span class="o">&gt;</span><span class="p">)</span>
+
+<span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span>
+<span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</code></pre>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/v2/giftlists/"</span>
+  -H <span class="s2">"Authorization: Token API_KEY"</span>
+  -H <span class="s2">"Content-Type: application/json"</span>
+  -X POST -d <span class="s1">'&lt;JSON&gt;'</span>
+</code></pre>
+
+<blockquote>
+<p>Exemplo &lt; JSON &gt; a ser enviado:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"reference_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"type_list"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"customer"</span><span class="p">:</span><span class="w"> </span><span class="mi">72</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-12-29"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"guests"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"collection"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"notification"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"publish"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"ceremony_zipcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"ceremony_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"ceremony_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"ceremony_neighborhood"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"ceremony_complement"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"ceremony_city"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"ceremony_state"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"reception_zipcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"reception_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"reception_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"reception_neighborhood"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"reception_complement"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"reception_city"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"reception_state"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Isabella Magalhães"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"isahiroshima1999@gmail.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"mother_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Andreia Magalhães"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"father_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sidney Cortiglio"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"partner_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Murillo Augusto Moreira Bonamini"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"partner_email"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"partner_mother_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Andrea Bonamini"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"partner_father_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Gilberto Bonamini"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"shipping_zipcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"37580-000"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"shipping_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rua Bahia"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"shipping_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"261"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"shipping_neighborhood"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Magioli"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"shipping_complement"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Loja"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"shipping_city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MONTE SIÃO"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"shipping_state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MG"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"shipping_date"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"shipping_description"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"user"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>O comando acima retonar um JSON conforme estrutura abaixo:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">24</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"reference_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/lista/presente/isabella-magalhaes-e-murillo-augusto-moreira-bonamini/24/"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"type_list"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"customer"</span><span class="p">:</span><span class="w"> </span><span class="mi">72</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-12-29"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"guests"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"collection"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"notification"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"publish"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"ceremony_zipcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"ceremony_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"ceremony_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"ceremony_neighborhood"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"ceremony_complement"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"ceremony_city"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"ceremony_state"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"reception_zipcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"reception_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"reception_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"reception_neighborhood"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"reception_complement"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"reception_city"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"reception_state"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Isabella Magalhães"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"isahiroshima1999@gmail.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"mother_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Andreia Magalhães"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"father_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sidney Cortiglio"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"partner_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Murillo Augusto Moreira Bonamini"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"partner_email"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"partner_mother_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Andrea Bonamini"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"partner_father_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Gilberto Bonamini"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"shipping_zipcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"37580-000"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"shipping_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rua Bahia"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"shipping_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"261"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"shipping_neighborhood"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Magioli"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"shipping_complement"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Loja"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"shipping_city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MONTE SIÃO"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"shipping_state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MG"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"shipping_date"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"shipping_description"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"add_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-07-02T17:05:26.448387"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"change_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-07-02T17:21:02.975380"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"user"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"giftcard"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"gift_items"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h3 id="descri-o-dos-campos">Descrição dos campos</h3>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Requerido</th>
+<th>Unico</th>
+<th>Tipo do Campo</th>
+<th>Max Caracteres</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td></td>
+<td>*</td>
+<td>Int4</td>
+<td>-</td>
+<td>ID da lista</td>
+</tr>
+<tr>
+<td>reference_code</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>64</td>
+<td>Código de referência</td>
+</tr>
+<tr>
+<td>url</td>
+<td></td>
+<td>*</td>
+<td>Text</td>
+<td>-</td>
+<td>URL da Lista de Presente (On-Line) gerado automaticamente</td>
+</tr>
+<tr>
+<td>type_list</td>
+<td></td>
+<td></td>
+<td>Int4</td>
+<td>-</td>
+<td>ID do Tipo da Lista</td>
+</tr>
+<tr>
+<td>customer</td>
+<td></td>
+<td></td>
+<td>Int4</td>
+<td>-</td>
+<td>ID do Cliente</td>
+</tr>
+<tr>
+<td>date</td>
+<td></td>
+<td></td>
+<td>Date</td>
+<td>-</td>
+<td>Data do Evento</td>
+</tr>
+<tr>
+<td>state</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>2</td>
+<td>Estado do Evento</td>
+</tr>
+<tr>
+<td>guests</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>2</td>
+<td>Número de Convidados</td>
+</tr>
+<tr>
+<td>message</td>
+<td></td>
+<td></td>
+<td>Text</td>
+<td></td>
+<td>Mensagem para os convidados que acessarem a sua lista</td>
+</tr>
+<tr>
+<td>collection</td>
+<td></td>
+<td></td>
+<td>Int4</td>
+<td>-</td>
+<td>ID da coleção, usado para lista pronta</td>
+</tr>
+<tr>
+<td>notification</td>
+<td></td>
+<td></td>
+<td>Boolean</td>
+<td>1</td>
+<td>Deseja receber informações sobre minha lista por e-mail</td>
+</tr>
+<tr>
+<td>publish</td>
+<td></td>
+<td></td>
+<td>Boolean</td>
+<td>1</td>
+<td>Deixar minha lista disponível no site</td>
+</tr>
+<tr>
+<td>status</td>
+<td>*</td>
+<td></td>
+<td>Varchar</td>
+<td>2</td>
+<td>Status da lista (A = Ativa, F = Finalizada, I = Inativa, E = Excluída), default = A</td>
+</tr>
+<tr>
+<td>ceremony_zipcode</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>9</td>
+<td>CEP do Local da Cerimônia</td>
+</tr>
+<tr>
+<td>ceremony_address</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>150</td>
+<td>Endereço do Local da Cerimônia</td>
+</tr>
+<tr>
+<td>ceremony_number</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>8</td>
+<td>Número do Local da Cerimônia</td>
+</tr>
+<tr>
+<td>ceremony_neighborhood</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>120</td>
+<td>Bairro do Local da Cerimônia</td>
+</tr>
+<tr>
+<td>ceremony_complement</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>255</td>
+<td>Complemento do Local da Cerimônia</td>
+</tr>
+<tr>
+<td>ceremony_city</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>150</td>
+<td>Cidade do Local da Cerimônia</td>
+</tr>
+<tr>
+<td>ceremony_state</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>2</td>
+<td>Estado do Local da Cerimônia</td>
+</tr>
+<tr>
+<td>reception_zipcode</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>9</td>
+<td>CEP do Local da Festa</td>
+</tr>
+<tr>
+<td>reception_address</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>150</td>
+<td>Endereço do Local da Festa</td>
+</tr>
+<tr>
+<td>reception_number</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>8</td>
+<td>Número do Local da Festa</td>
+</tr>
+<tr>
+<td>reception_neighborhood</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>120</td>
+<td>Bairro do Local da Festa</td>
+</tr>
+<tr>
+<td>reception_complement</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>60</td>
+<td>Complemento do Local da Festa</td>
+</tr>
+<tr>
+<td>reception_city</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>150</td>
+<td>Cidade do Local da Festa</td>
+</tr>
+<tr>
+<td>reception_state</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>2</td>
+<td>Estado do Local da Festa</td>
+</tr>
+<tr>
+<td>name</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>255</td>
+<td>Nome do dono da Lista</td>
+</tr>
+<tr>
+<td>email</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>255</td>
+<td>E-mail do dono da Lista</td>
+</tr>
+<tr>
+<td>mother_name</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>255</td>
+<td>Nome da mãe do dono da Lista</td>
+</tr>
+<tr>
+<td>father_name</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>255</td>
+<td>Nome do pai do dono da Lista</td>
+</tr>
+<tr>
+<td>partner_name</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>255</td>
+<td>Nome do parceiro da Lista</td>
+</tr>
+<tr>
+<td>partner_email</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>255</td>
+<td>E-mail do parceiro da Lista</td>
+</tr>
+<tr>
+<td>partner_mother_name</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>255</td>
+<td>Nome da mãe do parceiro da Lista</td>
+</tr>
+<tr>
+<td>partner_father_name</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>255</td>
+<td>Nome do pai do parceiro da Lista</td>
+</tr>
+<tr>
+<td>shipping_zipcode</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>9</td>
+<td>CEP de Entrega</td>
+</tr>
+<tr>
+<td>shipping_address</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>150</td>
+<td>Endereço de Entrega</td>
+</tr>
+<tr>
+<td>shipping_number</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>8</td>
+<td>Número de Entrega</td>
+</tr>
+<tr>
+<td>shipping_neighborhood</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>120</td>
+<td>Bairro de Entrega</td>
+</tr>
+<tr>
+<td>shipping_complement</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>60</td>
+<td>Complemento de Entrega</td>
+</tr>
+<tr>
+<td>shipping_city</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>150</td>
+<td>Cidade de Entrega</td>
+</tr>
+<tr>
+<td>shipping_state</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>2</td>
+<td>Estado de Entrega</td>
+</tr>
+<tr>
+<td>shipping_date</td>
+<td></td>
+<td></td>
+<td>Date</td>
+<td>-</td>
+<td>Data de entrega</td>
+</tr>
+<tr>
+<td>shipping_description</td>
+<td></td>
+<td></td>
+<td>Text</td>
+<td></td>
+<td>Observação da entrega</td>
+</tr>
+<tr>
+<td>add_date</td>
+<td></td>
+<td></td>
+<td>Date</td>
+<td>-</td>
+<td>Data de criação</td>
+</tr>
+<tr>
+<td>change_date</td>
+<td></td>
+<td></td>
+<td>Date</td>
+<td>-</td>
+<td>Data de alteração</td>
+</tr>
+<tr>
+<td>user</td>
+<td></td>
+<td></td>
+<td>Int4</td>
+<td>-</td>
+<td>ID do usuario, quando criado pela administração</td>
+</tr>
+<tr>
+<td>giftcard</td>
+<td></td>
+<td></td>
+<td>Int4</td>
+<td>-</td>
+<td>Dados do GiftCard, quando o pedido é entregue por vale. Gerado automaticamente</td>
+</tr>
+</tbody></table>
+
+<h2 id="altera-o">Alteração</h2>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<aside class="request">
+    <span class="method put">PUT</span><span class="endpoint">/{ENVIRONMENT}/api/v2/giftlists/{ID}/</span>
+</aside>
+<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s">'https://api.convertize.com.br/{ENVIRONMENT}/api/v2/giftlists/{ID}/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+  <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Token </span><span class="si">%</span><span class="s">s'</span> <span class="o">%</span> <span class="n">API_KEY</span><span class="p">,</span>
+  <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/json'</span>
+<span class="p">},</span> <span class="n">data</span><span class="o">=&lt;</span><span class="n">JSON</span><span class="o">&gt;</span><span class="p">)</span>
+
+<span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span>
+<span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</code></pre>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.convertize.com.br/{ENVIRONMENT}/api/v2/giftlists/{ID}/"</span>
+  -H <span class="s2">"Authorization: Token API_KEY"</span>
+  -H <span class="s2">"Content-Type: application/json"</span>
+  -X PUT -d <span class="s1">'&lt;JSON&gt;'</span>
+</code></pre>
+
+<blockquote>
+<p>Exemplo &lt; JSON &gt; a ser enviado:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"reference_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1234"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"type_list"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"customer"</span><span class="p">:</span><span class="w"> </span><span class="mi">72</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-12-29"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"guests"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"collection"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"notification"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"publish"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"ceremony_zipcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"ceremony_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"ceremony_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"ceremony_neighborhood"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"ceremony_complement"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"ceremony_city"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"ceremony_state"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"reception_zipcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"reception_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"reception_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"reception_neighborhood"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"reception_complement"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"reception_city"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"reception_state"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Isabella Magalhães"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"isahiroshima1999@gmail.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"mother_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Andreia Magalhães"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"father_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sidney Cortiglio"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"partner_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Murillo Augusto Moreira Bonamini"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"partner_email"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"partner_mother_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Andrea Bonamini"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"partner_father_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Gilberto Bonamini"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"shipping_zipcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"37580-000"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"shipping_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rua Bahia"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"shipping_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"261"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"shipping_neighborhood"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Magioli"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"shipping_complement"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Loja"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"shipping_city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MONTE SIÃO"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"shipping_state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MG"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"shipping_date"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"shipping_description"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"user"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>O comando acima retonar um JSON conforme estrutura abaixo:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">24</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"reference_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1234"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/lista/presente/isabella-magalhaes-e-murillo-augusto-moreira-bonamini/24/"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"type_list"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"customer"</span><span class="p">:</span><span class="w"> </span><span class="mi">72</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-12-29"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"guests"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"collection"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"notification"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"publish"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"ceremony_zipcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"ceremony_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"ceremony_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"ceremony_neighborhood"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"ceremony_complement"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"ceremony_city"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"ceremony_state"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"reception_zipcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"reception_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"reception_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"reception_neighborhood"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"reception_complement"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"reception_city"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"reception_state"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Isabella Magalhães"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"isahiroshima1999@gmail.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"mother_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Andreia Magalhães"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"father_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sidney Cortiglio"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"partner_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Murillo Augusto Moreira Bonamini"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"partner_email"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"partner_mother_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Andrea Bonamini"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"partner_father_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Gilberto Bonamini"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"shipping_zipcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"37580-000"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"shipping_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rua Bahia"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"shipping_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"261"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"shipping_neighborhood"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Magioli"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"shipping_complement"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Loja"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"shipping_city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MONTE SIÃO"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"shipping_state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MG"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"shipping_date"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"shipping_description"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"add_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-07-02T17:05:26.448387"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"change_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-07-02T17:21:02.975380"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"user"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"giftcard"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"gift_items"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h3 id="url-parameters">URL Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ID</td>
+<td>ID relativo a lista</td>
+</tr>
+</tbody></table>
+
+<h3 id="descri-o-dos-campos">Descrição dos campos</h3>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Requerido</th>
+<th>Unico</th>
+<th>Tipo do Campo</th>
+<th>Max Caracteres</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td></td>
+<td>*</td>
+<td>Int4</td>
+<td>-</td>
+<td>ID da lista</td>
+</tr>
+<tr>
+<td>reference_code</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>64</td>
+<td>Código de referência</td>
+</tr>
+<tr>
+<td>url</td>
+<td></td>
+<td>*</td>
+<td>Text</td>
+<td>-</td>
+<td>URL da Lista de Presente (On-Line) gerado automaticamente</td>
+</tr>
+<tr>
+<td>type_list</td>
+<td></td>
+<td></td>
+<td>Int4</td>
+<td>-</td>
+<td>ID do Tipo da Lista</td>
+</tr>
+<tr>
+<td>customer</td>
+<td></td>
+<td></td>
+<td>Int4</td>
+<td>-</td>
+<td>ID do Cliente</td>
+</tr>
+<tr>
+<td>date</td>
+<td></td>
+<td></td>
+<td>Date</td>
+<td>-</td>
+<td>Data do Evento</td>
+</tr>
+<tr>
+<td>state</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>2</td>
+<td>Estado do Evento</td>
+</tr>
+<tr>
+<td>guests</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>2</td>
+<td>Número de Convidados</td>
+</tr>
+<tr>
+<td>message</td>
+<td></td>
+<td></td>
+<td>Text</td>
+<td></td>
+<td>Mensagem para os convidados que acessarem a sua lista</td>
+</tr>
+<tr>
+<td>collection</td>
+<td></td>
+<td></td>
+<td>Int4</td>
+<td>-</td>
+<td>ID da coleção, usado para lista pronta</td>
+</tr>
+<tr>
+<td>notification</td>
+<td></td>
+<td></td>
+<td>Boolean</td>
+<td>1</td>
+<td>Deseja receber informações sobre minha lista por e-mail</td>
+</tr>
+<tr>
+<td>publish</td>
+<td></td>
+<td></td>
+<td>Boolean</td>
+<td>1</td>
+<td>Deixar minha lista disponível no site</td>
+</tr>
+<tr>
+<td>status</td>
+<td>*</td>
+<td></td>
+<td>Varchar</td>
+<td>2</td>
+<td>Status da lista (A = Ativa, F = Finalizada, I = Inativa, E = Excluída), default = A</td>
+</tr>
+<tr>
+<td>ceremony_zipcode</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>9</td>
+<td>CEP do Local da Cerimônia</td>
+</tr>
+<tr>
+<td>ceremony_address</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>150</td>
+<td>Endereço do Local da Cerimônia</td>
+</tr>
+<tr>
+<td>ceremony_number</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>8</td>
+<td>Número do Local da Cerimônia</td>
+</tr>
+<tr>
+<td>ceremony_neighborhood</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>120</td>
+<td>Bairro do Local da Cerimônia</td>
+</tr>
+<tr>
+<td>ceremony_complement</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>255</td>
+<td>Complemento do Local da Cerimônia</td>
+</tr>
+<tr>
+<td>ceremony_city</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>150</td>
+<td>Cidade do Local da Cerimônia</td>
+</tr>
+<tr>
+<td>ceremony_state</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>2</td>
+<td>Estado do Local da Cerimônia</td>
+</tr>
+<tr>
+<td>reception_zipcode</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>9</td>
+<td>CEP do Local da Festa</td>
+</tr>
+<tr>
+<td>reception_address</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>150</td>
+<td>Endereço do Local da Festa</td>
+</tr>
+<tr>
+<td>reception_number</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>8</td>
+<td>Número do Local da Festa</td>
+</tr>
+<tr>
+<td>reception_neighborhood</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>120</td>
+<td>Bairro do Local da Festa</td>
+</tr>
+<tr>
+<td>reception_complement</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>60</td>
+<td>Complemento do Local da Festa</td>
+</tr>
+<tr>
+<td>reception_city</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>150</td>
+<td>Cidade do Local da Festa</td>
+</tr>
+<tr>
+<td>reception_state</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>2</td>
+<td>Estado do Local da Festa</td>
+</tr>
+<tr>
+<td>name</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>255</td>
+<td>Nome do dono da Lista</td>
+</tr>
+<tr>
+<td>email</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>255</td>
+<td>E-mail do dono da Lista</td>
+</tr>
+<tr>
+<td>mother_name</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>255</td>
+<td>Nome da mãe do dono da Lista</td>
+</tr>
+<tr>
+<td>father_name</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>255</td>
+<td>Nome do pai do dono da Lista</td>
+</tr>
+<tr>
+<td>partner_name</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>255</td>
+<td>Nome do parceiro da Lista</td>
+</tr>
+<tr>
+<td>partner_email</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>255</td>
+<td>E-mail do parceiro da Lista</td>
+</tr>
+<tr>
+<td>partner_mother_name</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>255</td>
+<td>Nome da mãe do parceiro da Lista</td>
+</tr>
+<tr>
+<td>partner_father_name</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>255</td>
+<td>Nome do pai do parceiro da Lista</td>
+</tr>
+<tr>
+<td>shipping_zipcode</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>9</td>
+<td>CEP de Entrega</td>
+</tr>
+<tr>
+<td>shipping_address</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>150</td>
+<td>Endereço de Entrega</td>
+</tr>
+<tr>
+<td>shipping_number</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>8</td>
+<td>Número de Entrega</td>
+</tr>
+<tr>
+<td>shipping_neighborhood</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>120</td>
+<td>Bairro de Entrega</td>
+</tr>
+<tr>
+<td>shipping_complement</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>60</td>
+<td>Complemento de Entrega</td>
+</tr>
+<tr>
+<td>shipping_city</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>150</td>
+<td>Cidade de Entrega</td>
+</tr>
+<tr>
+<td>shipping_state</td>
+<td></td>
+<td></td>
+<td>Varchar</td>
+<td>2</td>
+<td>Estado de Entrega</td>
+</tr>
+<tr>
+<td>shipping_date</td>
+<td></td>
+<td></td>
+<td>Date</td>
+<td>-</td>
+<td>Data de entrega</td>
+</tr>
+<tr>
+<td>shipping_description</td>
+<td></td>
+<td></td>
+<td>Text</td>
+<td></td>
+<td>Observação da entrega</td>
+</tr>
+<tr>
+<td>add_date</td>
+<td></td>
+<td></td>
+<td>Date</td>
+<td>-</td>
+<td>Data de criação</td>
+</tr>
+<tr>
+<td>change_date</td>
+<td></td>
+<td></td>
+<td>Date</td>
+<td>-</td>
+<td>Data de alteração</td>
+</tr>
+<tr>
+<td>user</td>
+<td></td>
+<td></td>
+<td>Int4</td>
+<td>-</td>
+<td>ID do usuario, quando criado pela administração</td>
+</tr>
+<tr>
+<td>giftcard</td>
+<td></td>
+<td></td>
+<td>Int4</td>
+<td>-</td>
+<td>Dados do GiftCard, quando o pedido é entregue por vale. Gerado automaticamente</td>
+</tr>
+</tbody></table>
+
+<h2 id="delete">Delete</h2>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<aside class="request">
+    <span class="method delete">DELETE</span><span class="endpoint">/{ENVIRONMENT}/api/v2/giftlists/{ID}/</span>
+</aside>
+<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s">'https://api.convertize.com.br/{ENVIRONMENT}/api/v2/giftlists/{ID}/'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+  <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Token </span><span class="si">%</span><span class="s">s'</span> <span class="o">%</span> <span class="n">API_KEY</span><span class="p">,</span>
+<span class="p">})</span>
+
+<span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span>
+<span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</code></pre>
+<pre class="highlight shell"><code>curl -X DELETE <span class="se">\</span>
+  https://api.convertize.com.br/<span class="o">{</span>ENVIRONMENT<span class="o">}</span>/api/v2/giftlists/<span class="o">{</span>ID<span class="o">}</span>/ <span class="se">\</span>
+  -H <span class="s1">'Authorization: Token API_KEY'</span>
+</code></pre>
+
+<blockquote>
+<p>O comando acima retonar um HTTP STATUS:</p>
+</blockquote>
+<pre class="highlight plaintext"><code>Http Status: 204
+</code></pre>
+
+<h3 id="url-parameters">URL Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ID</td>
+<td>ID relativo a lista</td>
 </tr>
 </tbody></table>
 
